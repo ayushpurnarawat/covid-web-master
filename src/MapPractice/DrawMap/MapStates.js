@@ -59,7 +59,7 @@ class MapStates extends Component{
         return(
             <div id="MapStates" className={classes.main}>
                 <div id='DataSection' className={classes.DataSection} >
-                    <div style={{display:'flex',flexDirection:'row',height:'200px',flex:'1'}}>
+                    <div style={{display:'flex',flexDirection:'row',height:'200px',flex:'1',marginTop:'10%'}}>
                                              
                     <div className={classes.Change_Country}>
                             <div className={classes.Change_Country_HighLight}>
@@ -70,7 +70,9 @@ class MapStates extends Component{
                     <div className={classes.ConfirmCases}>
                             {/* <h3 className={classes.ConfirmCases_p}>Confirm</h3>
                             <h2 className={classes.ConfirmCases_p}>420000</h2> */}
-                            <h2 >{this.state.totalconfirmed}</h2>
+                            <div className={classes.ActiveCases_number}>
+                            <h2 className={classes.ActiveCases_h}>{this.state.totalconfirmed}</h2>
+                            </div>
                             <div className={classes.ConfirmCases_HighLight}>
                             
                                 <h3 className={classes.ConfirmCases_p}>Confirm</h3>
@@ -79,7 +81,10 @@ class MapStates extends Component{
                     <div className={classes.ActiveCases}>
                             {/* <h3 className={classes.ActiveCases_h}>Actice</h3>
                             <h2 className={classes.ActiveCases_h}>450003</h2> */}
+                            <div className={classes.ActiveCases_number}>
                             <h2 className={classes.ActiveCases_h}>{this.state.totalactive}</h2>
+
+                            </div>
                             <div className={classes.ActiveCases_HighLight}>
                             <h3 className={classes.ActiveCases_h}>Active</h3>
                             </div>
@@ -89,9 +94,11 @@ class MapStates extends Component{
                     <div className={classes.Recover}>
                             {/* <h3 className={classes.Recover_h}>Recover</h3>
                             <h2 className={classes.Recover_h}>320000</h2> */}
+                            <div className={classes.Recover_number}>
                             <h2 className={classes.Recover_h}>
                                 {this.state.totalrecovered}
                             </h2>
+                            </div>
                             <div className={classes.Recover_HighLight}>
                             <h3 className={classes.Recover_h}>Recover</h3>
                             </div>
@@ -100,9 +107,12 @@ class MapStates extends Component{
                     <div className={classes.Deceased}>
                         {/* <h3 className={classes.Deceased_h}>Deceased</h3>
                         <h2 className={classes.Deceased_h}>1000</h2> */}
-                        <h2 className={classes.Deceased_h}>
+                        <div className={classes.Deceased_number}>                        
+                            <h2 className={classes.Deceased_h}>
                             {this.state.totaldeceased}
                         </h2>
+                        </div>
+
                         <div className={classes.Deceased_HighLight}>
                         <h3 className={classes.Deceased_h}>Deceased</h3>
                         </div>
