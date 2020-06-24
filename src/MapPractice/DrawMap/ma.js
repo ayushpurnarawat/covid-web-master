@@ -185,6 +185,8 @@ function TestMap (props){
                                                     if(region==='india')
                                                     {
                                                       // console.log(d)
+                                                      console.log(d.properties,"mouseOver")
+
                                                     var [state,Active,confirm,deat,recoverd]=MapNavigation(d.properties,Response,region)
                                                     SetState_Name({
                                                       state_Name:state,
@@ -195,7 +197,7 @@ function TestMap (props){
                                                     })
                                                   }
                                                     else{
-                                                    // console.log(d.properties,"mouseOver")
+                                                    console.log(d.properties,"mouseOver")
                                                     var [districtName,active,Confirm,death] = MapNavigation(d.properties,Response,region)
                                                       SetChangeRegion({
                                                         DistrictName:districtName,
@@ -231,6 +233,7 @@ function TestMap (props){
                                                                       .duration(200)
                                                                       .style("stroke",'transparent')
                                                                       console.log((d.properties.st_nm).replace(" ","").toLowerCase())
+                                                
                                                                       // SetChangeRegion({
                                                                       //   Region:(d.properties.st_nm).replace(" ","").toLowerCase(),
                                                                       //   ChangeMap:true

@@ -7,10 +7,8 @@ import BarPlot from '../../FinaleChart/BarPlot'
 import * as d3 from 'd3'
 import { timeDay, timeout } from 'd3'
 import Sus from './SuspenseData'
-// const SuspenseComponent = React.lazy(()=>import('./SuspenseData'))
-var totalconfirmed=0
-var totalrecovered=0
-var totaldeceased=0
+
+
 var size =0
 class MapStates extends Component{
     state = {
@@ -27,19 +25,7 @@ class MapStates extends Component{
         this.ObjectSize()
     }
     ObjectSize(){
-        Object.d = function(obj){
-            var size = 0,key
-            for(key in obj)
-            {
-                if(obj.hasOwnProperty(key))
-                size++
-            }
-            return size
-
-        } 
-        var ObjectSize = Object.d(this.props.ResponseData.cases_time_series)
-        console.log(ObjectSize)
-        size=ObjectSize
+        
         for(var key in this.props.ResponseData.cases_time_series)
         {
             this.setState({
