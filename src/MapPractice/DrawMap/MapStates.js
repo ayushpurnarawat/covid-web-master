@@ -63,7 +63,7 @@ class MapStates extends Component{
                                              
                     <div className={classes.Change_Country}>
                             <div className={classes.Change_Country_HighLight}>
-                                    <h3 className={classes.ConfirmCases_p}>Country name</h3>
+                                    <h3 className={classes.ConfirmCases_p}>Country</h3>
                             </div>
                     </div>
                     
