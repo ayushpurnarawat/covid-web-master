@@ -16,7 +16,7 @@ function MapNavigation(Region,response,MapName){
     // var svg = useRef(null)
     //     console.log(svg)
     
-    // console.log(MapName)
+    // console.log(response)
     if(MapName==='india'){
     for(var key in data)
     {
@@ -47,7 +47,8 @@ function MapNavigation(Region,response,MapName){
             district_name_response,
             response.data[state_name_response].districtData[district_name_response].active,
             response.data[state_name_response].districtData[district_name_response].confirmed,
-            response.data[state_name_response].districtData[district_name_response].deceased
+            response.data[state_name_response].districtData[district_name_response].deceased,
+            response.data[state_name_response].districtData[district_name_response].recovered
         ]
     }
     

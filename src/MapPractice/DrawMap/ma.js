@@ -1,14 +1,12 @@
-import React, { useEffect ,useState, Suspense} from 'react'
+import React, { useEffect ,useState} from 'react'
 import * as d3 from 'd3' 
 import Axios from 'axios'
 import MapNavigation from './MapNavigation'
-import updateMap from './updateMap'
 import Classes from './TestMap.module.css'
-import { svg } from 'd3'
+
 // import DataSection from './DataSection'
 
 import * as topojson from 'topojson'
-const DataSection = React.lazy(()=>import('./DataSection'))
 // var stat= null
 var Response = {}
 function TestMap (props){
@@ -30,7 +28,7 @@ function TestMap (props){
           })
 
           useEffect(()=>{
-            console.log(Region.Region_Name)
+            // console.log(Region.Region_Name)
             SetToggleMap({
               ChangeMap:true
             })
@@ -46,10 +44,11 @@ function TestMap (props){
             ActiveCases:'',
             ConfirmCases:'',
             Deaths:'',
-            ChangeMap:false
+            ChangeMap:false,
+            recovered:''
           })
           useEffect(()=>{
-            console.log(ToggleMap.ChangeMap)
+            // console.log(ToggleMap.ChangeMap)
           },[ChangeRegion.ActiveCases])
             // useEffect(()=>{
             // },[state_Name])  
@@ -60,34 +59,13 @@ function TestMap (props){
             // },[ChangeRegion])
   
                 function map(region){
-                                const winWidth =window.innerWidth
-                                const MAP_BUFFER_MARGINS = 42;
-                                const MAP_LEGEND_HEIGHT = 50;
-                                const INDIA_ASPECT_RATIO = 0.885;
-                                var widths =0
-                                const ScallingFactor = winWidth > 769 ? 0.9:1
-                                if(1)
-                                widths=winWidth >769 ? 480 : winWidth
-                                const mapHeight = (ScallingFactor * 500) / INDIA_ASPECT_RATIO;
-                                const height= MAP_BUFFER_MARGINS + MAP_LEGEND_HEIGHT+mapHeight
-                                console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
-                                console.log(region)
+                          
+                                // console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
+                                // console.log(region)
                                 var MapType = 'MapSection'
-                                var scale=530
-                                var scale_width=-580
-                                var scale_height=450
-                                console.log(ToggleMap.ChangeMap,"MapFuncrtion")
-                                // if(Region.Region_Name!=='india')
-                                // {
-                                  
-                                //   SetToggleMap({
-                                //     ChangeMap:true
-                                //   })
-                                // }
-                                // var width = 550
-                                // var height = 400
+                                
                                 if(Region.Region_Name!=='india'){
-                                  console.log("toggle")
+                                  // console.log("toggle")
                                   // d3.selectAll(`#${MapType} > *`).remove()
                                 d3.selectAll("svg").remove()
                                 
@@ -95,9 +73,7 @@ function TestMap (props){
                                   // SetToggleMap({
                                   //   ChangeMap:false
                                   // })
-                                  scale=900
-                                  scale_width=-2050
-                                  scale_height=1200
+                                  
                                   // d3.select("#MapSection")
                                   // .remove('svg')
                                 }
@@ -116,9 +92,9 @@ function TestMap (props){
 
                                 // Data and color scale
                                 var data = d3.map();
-                                var colorScale = d3.scaleThreshold()
-                                  .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-                                  .range(d3.schemeDark2[5]);
+                                // var colorScale = d3.scaleThreshold()
+                                //   .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+                                //   .range(d3.schemeDark2[5]);
                                 if(region==='india')
                                 Axios.get('https://api.covid19india.org/data.json').then(function(res){
                                     Response={
@@ -137,12 +113,12 @@ function TestMap (props){
                                     ready(data)
                                 })
                                 d3.json(`./Maps/india.json`).then(function(data){
-                                  console.log(data,"delhi")
+                                  // console.log(data,"delhi")
                                   const topology = topojson.feature(
                                     data,
                                     data.objects["india-districts-2019-734"|| "india-states"]
                                   );
-                                  console.log(topology)
+                                  // console.log(topology)
                               })
 
                               
@@ -160,7 +136,7 @@ function TestMap (props){
                                             .fitSize([320,450],todo)
                                           var path = d3.geoPath(projection)
 
-                                          console.log(todo)
+                                          // console.log(todo)
                                           var svg = d3.select(`#${MapType}`)
                                           .append('svg')
                                           // .attr('width','500px')
@@ -185,7 +161,7 @@ function TestMap (props){
                                                     if(region==='india')
                                                     {
                                                       // console.log(d)
-                                                      console.log(d.properties,"mouseOver")
+                                                      // console.log(d.properties,"mouseOver")
 
                                                     var [state,Active,confirm,deat,recoverd]=MapNavigation(d.properties,Response,region)
                                                     SetState_Name({
@@ -197,14 +173,15 @@ function TestMap (props){
                                                     })
                                                   }
                                                     else{
-                                                    console.log(d.properties,"mouseOver")
-                                                    var [districtName,active,Confirm,death] = MapNavigation(d.properties,Response,region)
+                                                    // console.log(Response,"mouseOver")
+                                                    var [districtName,active,Confirm,death,recovered] = MapNavigation(d.properties,Response,region)
                                                       SetChangeRegion({
                                                         DistrictName:districtName,
                                                         ActiveCases:active,
                                                         ConfirmCases:Confirm,
                                                         Deaths:death,
-                                                        Region:region
+                                                        Region:region,
+                                                        recovered:recovered
                                                       })
                                                     }
                                                     
@@ -232,7 +209,7 @@ function TestMap (props){
                                                                       .transition()
                                                                       .duration(200)
                                                                       .style("stroke",'transparent')
-                                                                      console.log((d.properties.st_nm).replace(" ","").toLowerCase())
+                                                                      // console.log((d.properties.st_nm).replace(" ","").toLowerCase())
                                                 
                                                                       // SetChangeRegion({
                                                                       //   Region:(d.properties.st_nm).replace(" ","").toLowerCase(),
@@ -271,9 +248,10 @@ function TestMap (props){
                                                   .attr("fill", function (d,i) {
                                                     
                                                     d.total = data.get(d.id) || 0;
-                                                    // return colorScale(d.total);
-                                                    // console.log(Response.data)
+                                                    // console.log(region)
+                                                    
                                                     return d3.interpolatePRGn(d.properties.st_code/100)
+                                                    
                                                   })
                                                   .style("stroke", "transparent")
                                                   .attr("class", function(d){ return "State" } )
@@ -365,14 +343,14 @@ function TestMap (props){
           </div>
       </div>
       
-      {/* <div className={Classes.Map_Data_Recover}>
+      <div className={Classes.Map_Data_Recover}>
           <div className={Classes.Map_Data_Confirm_focus}>
             <h5>Recoverd</h5>
           </div>
           <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{ChangeR}</h3>
+          <h3>{ChangeRegion.recovered}</h3>
           </div>
-      </div> */}
+      </div>
 
       <div className={Classes.Map_Data_Death}>
           <div className={Classes.Map_Data_Confirm_focus}>

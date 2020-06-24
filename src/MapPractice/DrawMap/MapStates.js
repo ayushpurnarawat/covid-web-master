@@ -1,12 +1,6 @@
-import React, { Component, useRef, useEffect, Suspense } from 'react'
+import React, { Component } from 'react'
 import TestMap from './ma'
 import classes from './MapStates.module.css'
-import Axios from 'axios'
-import LoliPopChart from '../../FinaleChart/LolliPopChart'
-import BarPlot from '../../FinaleChart/BarPlot'
-import * as d3 from 'd3'
-import { timeDay, timeout } from 'd3'
-import Sus from './SuspenseData'
 
 
 var size =0

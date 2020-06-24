@@ -1,8 +1,6 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import './App.css';
 import DataSection from './MapPractice/DrawMap/DataSection';
-// import MapStates from './MapPractice/DrawMap/MapStates';
-const MapStates = React.lazy(()=>import('./MapPractice/DrawMap/MapStates'))
 function App(props) {
 
   
