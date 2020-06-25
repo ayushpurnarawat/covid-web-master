@@ -82,7 +82,10 @@
     flex-wrap: wrap;
     
 }
-
+.State_Map_Visual_Data{
+    display: flex;
+    flex-direction: row;
+}
 @media(max-width:600px){
     .Map_Visual_Data{
         flex-direction: column;
@@ -99,4 +102,10 @@
     margin-left: 150px;
     width: 70%;
 }
+}
+
+@media(max-width:600px){
+    .State_Map_Visual_Data{
+        flex-direction: column;
+    }
 }

@@ -133,6 +133,8 @@ function TestMap (props){
                                     //       var projection = d3.geoMercator()
                                     // .scale(scale)  
                                     // .translate([scale_width, scale_height]); //320,450
+                                          if(region!=='india')
+                                          var Stroke_Color_for_Map ='black'
                                           var projection = d3.geoMercator()
                                             .fitSize([320,450],todo)
                                           var path = d3.geoPath(projection)
@@ -255,7 +257,8 @@ function TestMap (props){
                                                     return d3.interpolatePRGn(d.properties.st_code/100)
                                                     
                                                   })
-                                                  .style("stroke", "transparent")
+                                                  
+                                                  .style("stroke",Stroke_Color_for_Map)
                                                   .attr("class", function(d){ return "State" } )
                                                   .style("opacity", .8)
                                                   .on("mouseover", mouseOver )
@@ -322,10 +325,10 @@ function TestMap (props){
         <div>
           <h2 style={{color:'white'}}>{ChangeRegion.DistrictName}</h2>
         
-        <div id='map' style={{display:'flex',flexDirection:'row'}}>
+        <div id='map' className={classes.State_Map_Visual_Data}>
                 
 
-          <div style={{display:'flex',flexDirection:'row'}} data={"ayush"} id="ayush">
+          {/* <div style={{display:'flex',flexDirection:'row'}}className={classes.State} data={"ayush"} id="ayush"> */}
       
       <div className={Classes.Map_Data_Confirm} id="confirm">
           <div className={Classes.Map_Data_Confirm_focus}>
@@ -363,7 +366,7 @@ function TestMap (props){
           </div>
       </div>
       
-    </div>
+    {/* </div> */}
         
         {/* <div style={{border:'2px solid black',width:'250px',height:'200px'}}>
         <div className={Classes.Detail}>DistrictName:-{ChangeRegion.DistrictName}</div>
