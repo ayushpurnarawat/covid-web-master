@@ -8,7 +8,6 @@
     display: flex;
     flex-direction: row;
     background-image: linear-gradient(to right, rgba(100, 95, 95, 0.655), rgba(169, 173, 169, 0.835)), url("./COVID1.jpg");
-
     /* background-image: url("./COVID1.jpg"); */
     background-size: cover;
     -webkit-text-size-adjust: none;
@@ -31,6 +30,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
+    
 }
 .Change_Country_HighLight{
     width: 100%;
@@ -320,6 +320,7 @@
         /* flex-direction: column-reverse; */
         display: flex;
         flex-wrap: wrap;
+        margin-left: 0%;
         /* width: 100%;
         height: 100%; */
     }
