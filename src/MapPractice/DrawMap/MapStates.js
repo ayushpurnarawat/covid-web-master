@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TestMap from './ma'
 import classes from './MapStates.module.css'
+import LoliPopChart from '../../FinaleChart/LolliPopChart'
 
 
 var size =0
@@ -39,7 +40,7 @@ class MapStates extends Component{
         return(
             <div id="MapStates" className={classes.main}>
                 <div id='DataSection' className={classes.DataSection} >
-                    <div style={{display:'flex',flexDirection:'row',height:'200px',flex:'1',marginTop:'10%'}}>
+                    <div style={{display:'flex',flexDirection:'row',height:'150px',marginTop:'10%'}}>
                                              
                     <div className={classes.Change_Country}>
                             <div className={classes.Change_Country_HighLight}>
@@ -105,9 +106,12 @@ class MapStates extends Component{
                     {/* <Suspense fallback={<div><h1>LOADING</h1></div>}>
                         <SuspenseComponent/>
                     </Suspense> */}
+                    <div id="LoliPopChart_div" className={classes.LoliPopChart_div}>
+                    <LoliPopChart/>
+                    </div>
                     
                 </div>
-                <div id="MapSection" className={classes.MapSection}>
+                <div id="MapSection" className={classes.MapSection} >
                 
                     <div id="Map_data" className={classes.Map_data}>
                     <TestMap MapRegion={"india"}/>
