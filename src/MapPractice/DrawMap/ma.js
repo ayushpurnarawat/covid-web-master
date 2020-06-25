@@ -79,23 +79,9 @@ function TestMap (props){
                                   // .remove('svg')
                                 }
                                 
-                                // .attr('viewBox','0 0 632 800')
-                                // .attr('transform','translate(10,30)')
-
-                                // var path = d3.geoPath();
                                 
-                                // var projection = d3.geoMercator()
-                                //     .scale(scale)  
-
-                               // .center([0,0])
-
-                                // .translate([scale_width, scale_height]);
-
-                                // Data and color scale
                                 var data = d3.map();
-                                // var colorScale = d3.scaleThreshold()
-                                //   .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-                                //   .range(d3.schemeDark2[5]);
+                                
                                 if(region==='india')
                                 Axios.get('https://api.covid19india.org/data.json').then(function(res){
                                     Response={
@@ -126,13 +112,7 @@ function TestMap (props){
                           
                                         function ready(todo) 
                                         {
-                                          // const topology = topojson.feature({
-                                          //   todo,
-                                          //   todo.objects
-                                          // })
-                                    //       var projection = d3.geoMercator()
-                                    // .scale(scale)  
-                                    // .translate([scale_width, scale_height]); //320,450
+                                         
                                           if(region!=='india')
                                           var Stroke_Color_for_Map ='black'
                                           var projection = d3.geoMercator()
@@ -213,12 +193,7 @@ function TestMap (props){
                                                                       .transition()
                                                                       .duration(200)
                                                                       .style("stroke",'transparent')
-                                                                      // console.log((d.properties.st_nm).replace(" ","").toLowerCase())
-                                                
-                                                                      // SetChangeRegion({
-                                                                      //   Region:(d.properties.st_nm).replace(" ","").toLowerCase(),
-                                                                      //   ChangeMap:true
-                                                                      // })
+                                                                      
                                                                       svg.selectAll("*").remove()
                                                                       SetRegion({
                                                                         Region_Name:(d.properties.st_nm).replace(" ","").toLowerCase()
@@ -276,10 +251,7 @@ function TestMap (props){
   return(
     <div data={state_Name.Confrim}>
       <h2 style={{color:'white'}}>{state_Name.state_Name}</h2>
-      {/* <DataSection data={state_Name.Recoverd}/> */}
-      {/* <Suspense fallback={<div><h1>Loading</h1></div>} >
-          <DataSection/>
-      </Suspense> */}
+     
     <div className={classes.Map_Visual_Data} data={"ayush"} id="ayush">
       
       <div className={Classes.Map_Data_Confirm} id="confirm">
@@ -323,7 +295,8 @@ function TestMap (props){
     else {
       return(
         <div>
-          <h2 style={{color:'white'}}>{ChangeRegion.DistrictName}</h2>
+
+      <h2 style={{color:'white'}}>{ChangeRegion.DistrictName+"-"}{Region.Region_Name}</h2>
         
         <div id='map' className={classes.State_Map_Visual_Data}>
                 
@@ -366,16 +339,7 @@ function TestMap (props){
           </div>
       </div>
       
-    {/* </div> */}
-        
-        {/* <div style={{border:'2px solid black',width:'250px',height:'200px'}}>
-        <div className={Classes.Detail}>DistrictName:-{ChangeRegion.DistrictName}</div>
-        <div className={Classes.Detail}>Confrim:-{ChangeRegion.ConfirmCases}</div>
-        {/* <div>Recoverd:-{ChangeRegion.r}</div> */}
-        {/* <div className={Classes.Detail}> ActiveCases:-{ChangeRegion.ActiveCases}</div>
-        <div className={Classes.Detail}>Death:-{ChangeRegion.Deaths}</div> */}
-  
-        {/* </div> */}
+    
       </div>
       </div>
       )

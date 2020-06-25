@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TestMap from './ma'
 import classes from './MapStates.module.css'
 import LoliPopChart from '../../FinaleChart/LolliPopChart'
+import TableData from './TableData'
 
 
 var size =0
@@ -40,7 +41,7 @@ class MapStates extends Component{
         return(
             <div id="MapStates" className={classes.main}>
                 <div id='DataSection' className={classes.DataSection} >
-                    <div style={{display:'flex',flexDirection:'row',height:'150px',marginTop:'10%'}}>
+                    <div  className={classes.CurrentData}>
                                              
                     <div className={classes.Change_Country}>
                             <div className={classes.Change_Country_HighLight}>
@@ -100,14 +101,20 @@ class MapStates extends Component{
 
                     </div>
                     </div>
-                    {/* <div className={classes.LoliPopChart} id={LoliPopChart}> */}
-                        {/* <LoliPopChart/> */}
-                    {/* </div> */}
-                    {/* <Suspense fallback={<div><h1>LOADING</h1></div>}>
-                        <SuspenseComponent/>
-                    </Suspense> */}
-                    <div id="LoliPopChart_div" className={classes.LoliPopChart_div}>
+                    
+                    {/* <div id="LoliPopChart_div" className={classes.LoliPopChart_div}>
                     <LoliPopChart/>
+                    </div> */}
+                    <div className={classes.TableView} > 
+                        <div className={classes.Table_Row_Heading}>
+                            <div className={classes.Cell_Heading} style={{width:"48%"}}>State</div>
+                            <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Confirm</div>
+                            <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Active</div>
+                            <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Recover</div>
+                            <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Deaths</div>
+                        </div>
+                        
+                        <TableData data={this.props.ResponseData}/>
                     </div>
                     
                 </div>
