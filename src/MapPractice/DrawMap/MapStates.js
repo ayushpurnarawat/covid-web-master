@@ -115,9 +115,10 @@ class MapStates extends Component{
                 
                     <div id="Map_data" className={classes.Map_data}>
                     <TestMap MapRegion={"india"}/>
+
                     </div>
-                    
-                        
+                    {/* <div id="MapVisuality"></div> */}
+
                 </div>
                 {/* <LoliPopChart /> */}
                 {/* <BarPlot/> */}

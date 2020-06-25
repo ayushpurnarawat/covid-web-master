@@ -75,3 +75,28 @@
     box-shadow: 0 24px 25px rgb(0,0,0,.5);
     float: inline-start;
 }
+
+.Map_Visual_Data{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+@media(max-width:600px){
+    .Map_Visual_Data{
+        flex-direction: column;
+    }
+}
+.Map_data{
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+}
+
+@media (max-width:600px){
+.SVG_FOR_MAP{
+    margin-left: 150px;
+    width: 70%;
+}
+}

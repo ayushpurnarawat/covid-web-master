@@ -7,6 +7,7 @@ import Classes from './TestMap.module.css'
 // import DataSection from './DataSection'
 
 import * as topojson from 'topojson'
+import classes from './TestMap.module.css'
 // var stat= null
 var Response = {}
 function TestMap (props){
@@ -131,7 +132,7 @@ function TestMap (props){
                                           // })
                                     //       var projection = d3.geoMercator()
                                     // .scale(scale)  
-                                    // .translate([scale_width, scale_height]);
+                                    // .translate([scale_width, scale_height]); //320,450
                                           var projection = d3.geoMercator()
                                             .fitSize([320,450],todo)
                                           var path = d3.geoPath(projection)
@@ -144,6 +145,7 @@ function TestMap (props){
                                           .attr('viewBox',"0 0 400 400")
                                           .attr("margin-left","5px")
                                           .attr("id",`the_SVG_ID_${MapType}`)
+                                          .attr("class",classes.SVG_FOR_MAP)
                                           // .style('position','absolute')
                                           
                                                   let mouseOver = function(d) {
@@ -275,7 +277,7 @@ function TestMap (props){
       {/* <Suspense fallback={<div><h1>Loading</h1></div>} >
           <DataSection/>
       </Suspense> */}
-    <div style={{display:'flex',flexDirection:'row'}} data={"ayush"} id="ayush">
+    <div className={classes.Map_Visual_Data} data={"ayush"} id="ayush">
       
       <div className={Classes.Map_Data_Confirm} id="confirm">
           <div className={Classes.Map_Data_Confirm_focus}>

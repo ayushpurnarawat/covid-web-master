@@ -30,7 +30,7 @@ function LoliPopChart(){
         .append('svg')
         .attr("id","LolliPopChart")
         .attr('width','100%')
-        .attr('height','50%%')
+        .attr('height','100%')
         .style("background-color","rgb(137,58,57,.5)")
         .style("border-radius","8px")
         .style("margin-left","2%")
