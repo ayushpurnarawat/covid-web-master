@@ -33,6 +33,17 @@ function TableData(props){
         })
     }
     }
+   function MouseLeave(event){
+        // d3.selectAll(`.${StateData.State_name}`)
+        // .transition()
+        // .duration(100)
+        // .style("stroke", "transparent")
+        console.log(StateData.State_name)
+        d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
+            .transition()
+            .duration(200)
+            .style("stroke","transparent")
+    }
     useEffect(()=>{
         console.log('effect')
 //      return   (<Display state_Name={StateData.State_name} 
@@ -52,6 +63,16 @@ function TableData(props){
         .text(StateData.deaths)
         d3.select("#state_data")
         .text(StateData.State_name)
+            console.log((StateData.State_name).replace(" ","").toLowerCase())
+        d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
+                    // .transition()
+                    // .duration(200)
+                    // .style("opacity", .5)
+                    // d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                    .style("stroke", "black")
         }
 
     },[StateData])
@@ -69,6 +90,7 @@ function TableData(props){
 
             onMouseOver={(event)=>ch(event)}
             onTouchStart={ch}
+            onMouseLeave={(event)=>MouseLeave(event)}
             >
             
             <div className={classes.Cell_Data} style={{width:"50%"}}>{props.data.statewise[key].state}</div>
