@@ -8,10 +8,11 @@ import Classes from './TestMap.module.css'
 
 import * as topojson from 'topojson'
 import classes from './TestMap.module.css'
+import Display from './Display'
 // var stat= null
 var Response = {}
 function TestMap (props){
-          
+          console.log(props)
           const [state_Name,SetState_Name] = useState({
             state_Name:'India',
             ActiveCases:'',
@@ -250,46 +251,12 @@ function TestMap (props){
   if(Region.Region_Name==='india'){
   return(
     <div data={state_Name.Confrim}>
-      <h2 style={{color:'white'}}>{state_Name.state_Name}</h2>
-     
-    <div className={classes.Map_Visual_Data} data={"ayush"} id="ayush">
-      
-      <div className={Classes.Map_Data_Confirm} id="confirm">
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Confirmed</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{state_Name.Confrim}</h3>
-          </div>
-          
-      </div>
-      <div className={Classes.Map_Data_Active}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Active</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{state_Name.ActiveCases}</h3>
-          </div>
-      </div>
-      
-      <div className={Classes.Map_Data_Recover}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Recoverd</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{state_Name.Recoverd}</h3>
-          </div>
-      </div>
-      <div className={Classes.Map_Data_Death}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Deceased</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{state_Name.Death}</h3>
-          </div>
-      </div>
-      
-    </div>
+      {/* <h2 style={{color:'white'}}>{state_Name.state_Name}</h2> */}
+     <Display state_Name={state_Name.state_Name} Confirm={state_Name.Confrim}
+        ActiveCases={state_Name.ActiveCases} Recoverd={state_Name.Recoverd}
+        Death={state_Name.Death}
+     />
+    
     </div>
   )}
     else {
@@ -303,12 +270,12 @@ function TestMap (props){
 
           {/* <div style={{display:'flex',flexDirection:'row'}}className={classes.State} data={"ayush"} id="ayush"> */}
       
-      <div className={Classes.Map_Data_Confirm} id="confirm">
+      <div className={Classes.Map_Data_Confirm} >
           <div className={Classes.Map_Data_Confirm_focus}>
             <h5>Confirmed</h5>
           </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{ChangeRegion.ConfirmCases}</h3>
+          <div className={Classes.Map_Data_Confirm_Number} >
+          <h3 >{ChangeRegion.ConfirmCases}</h3>
           </div>
           
       </div>

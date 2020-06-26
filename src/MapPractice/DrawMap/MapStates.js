@@ -3,6 +3,7 @@ import TestMap from './ma'
 import classes from './MapStates.module.css'
 import LoliPopChart from '../../FinaleChart/LolliPopChart'
 import TableData from './TableData'
+import Events from './Events'
 
 
 var size =0
@@ -16,7 +17,7 @@ class MapStates extends Component{
 
 
     }
-
+    
     componentDidMount(){
         this.ObjectSize()
     }
@@ -107,8 +108,7 @@ class MapStates extends Component{
                     </div> */}
                     <div className={classes.TableView} > 
                         <div className={classes.Table_Row_Heading}>
-                            <div className={classes.Cell_Heading} style={{width:"48%"}}>State</div>
-                            <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Confirm</div>
+                            <div className={classes.Cell_Heading} style={{width:'12.5%'}} >Confirm</div>
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Active</div>
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Recover</div>
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Deaths</div>
