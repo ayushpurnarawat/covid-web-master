@@ -14,11 +14,21 @@ class MapStates extends Component{
         totalconfirmed:0,
         totalrecovered:0,
         totaldeceased:0,
-        totalactive:0
-
+        totalactive:0,
+        Country:'india'
 
     }
-    
+    ChangeCountryByButton_India=()=>{
+        this.setState({
+            Country:'india'
+        })
+    }
+    ChangeCountryByButton=()=>{
+        console.log("click [ChangeCountry] ")
+        this.setState({
+            Country:"world"
+        })
+    }
     componentDidMount(){
         this.ObjectSize()
     }
@@ -121,10 +131,12 @@ class MapStates extends Component{
                     
                 </div>
                 <div id="MapSection" className={classes.MapSection} >
-                
                     <div id="Map_data" className={classes.Map_data}>
+                    {/* <button onClick={this.ChangeCountryByButton_India} id="ChangeCountryByButton_India">India</button> */}
+                    <button onClick={this.ChangeCountryByButton} id="Change_Country_Button" className='Change_Country_Button'>GLobal</button>
+
                         <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
-                    <TestMap MapRegion={"india"}/>
+                    <TestMap MapRegion={this.state.Country}/>
                     </Suspense>
                     </div>
                     {/* <div id="MapVisuality"></div> */}

@@ -12,7 +12,12 @@ import Display from './Display'
 // var stat= null
 var Response = {}
 function TestMap (props){
-          console.log(props)
+    console.log(props.MapRegion)
+          const [ChangeCountry,SetChangeCountry] =useState({
+            country_Name:'',
+            flag:false
+          })
+
           const [state_Name,SetState_Name] = useState({
             state_Name:'India',
             ActiveCases:'',
@@ -21,26 +26,43 @@ function TestMap (props){
             Recoverd:''
           
           });
+          useEffect(()=>{
+            console.log("ChangeCountry")
+            if(props.MapRegion==='world')
+            map(ChangeCountry.country_Name)
+          },[ChangeCountry])
+          const [Global,SetGlobal]= useState({
+            country_Name:'',
+            total_Active:'',
+            total_confirm:'',
+            total_death:'',
+            total_recoverd:''
 
+          })
+          useEffect(()=>{
+            console.log("Global_Effect")
+          },[Global])
           const [ToggleMap,SetToggleMap]=useState({
             ChangeMap:false
           })
           const [Region,SetRegion]=useState({
-            Region_Name:'india'
+            Region_Name:'india' //india
           })
-
+          
           useEffect(()=>{
-            // console.log(Region.Region_Name)
+            console.log("2nd Effect")
             SetToggleMap({
               ChangeMap:true
             })
+            if(props.MapRegion!=='world')
             map(Region.Region_Name)
-            
+          
+                        
             
           },[Region])
          
           const [ChangeRegion,SetChangeRegion]=useState({
-            Region:'india',
+            Region:'indias',
             ChangeJsonData:'',
             DistrictName:'',
             ActiveCases:'',
@@ -59,14 +81,14 @@ function TestMap (props){
             //   console.log(ChangeRegion.Region)
             //   map(ChangeRegion.Region)
             // },[ChangeRegion])
-  
+          
                 function map(region){
                           
                                 // console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
-                                // console.log(region)
+                                console.log(region)
                                 var MapType = 'MapSection'
                                 
-                                if(Region.Region_Name!=='india'){
+                                if(region!=='india'){
                                   // console.log("toggle")
                                   // d3.selectAll(`#${MapType} > *`).remove()
                                 d3.selectAll("svg").remove()
@@ -89,6 +111,15 @@ function TestMap (props){
                                       ...res
                                     }
                                 })
+                                else if(region==='world')
+                                {
+                                  Axios.get('https://covid-19.dataflowkit.com/v1').then(function(res){
+                                    // console.log(res,"world")
+                                    Response={
+                                      ...res
+                                    }
+                                  })
+                                }
                                 else{
                                   Axios.get('https://api.covid19india.org/state_district_wise.json').then(function(res){
                                     Response={
@@ -96,6 +127,7 @@ function TestMap (props){
                                     }
                                 })
                                 }
+                                //${region}
                                 d3.json(`./Maps/${region}.geojson`).then(function(data){
                                     // console.log(data,"delhi")
                                     ready(data)
@@ -141,23 +173,48 @@ function TestMap (props){
                                                       .duration(200)
                                                       .style("opacity", 1)
                                                       .style("stroke", "black")
-                                                    // console.log(d.properties.st_nm)
+                                                    // console.log(d)
                                                     // stat = d.properties.st_nm
                                                     if(region==='india')
                                                     {
                                                       // console.log(d)
                                                       // console.log(d.properties,"mouseOver")
 
-                                                    var [state,Active,confirm,deat,recoverd]=MapNavigation(d.properties,Response,region)
+                                                    var [state,active_india,confirm,deat,recoverd]=MapNavigation(d.properties,Response,region)
                                                     SetState_Name({
                                                       state_Name:state,
                                                       Confrim:confirm,
                                                       Recoverd:recoverd,
-                                                      ActiveCases:Active,
+                                                      ActiveCases:active_india,
                                                       Death:deat
                                                     })
                                                   }
-                                                    else{
+                                                  else if(region==='world')
+                                                  {
+                                                      try{  
+                                                    var[country_Name,total_confirm,total_Active,tatal_recoverd,total_death]=MapNavigation(d.properties,Response,region)
+                                                      console.log(country_Name," ",total_confirm)
+
+                                                      SetGlobal({
+                                                        country_Name:country_Name,
+                                                        total_confirm:total_confirm,
+                                                        total_Active:total_Active,
+                                                        total_death:total_death,
+                                                        total_recoverd:tatal_recoverd
+                                                      })
+                                                    }
+                                                    catch{
+                                                      console.log("ERROR ACCUR",d.properties)
+                                                      SetGlobal({
+                                                        country_Name:d.properties.name,
+                                                        total_confirm:'0',
+                                                        total_Active:'0',
+                                                        total_death:'0',
+                                                        total_recoverd:'0'
+                                                      })
+                                                    }
+                                                  }
+                                                  else{
                                                     // console.log(Response,"mouseOver")
                                                     var [districtName,active,Confirm,death,recovered] = MapNavigation(d.properties,Response,region)
                                                       SetChangeRegion({
@@ -172,6 +229,27 @@ function TestMap (props){
                                                     
                                                   }
                                                   
+                                                  let ChangeCountryMouseOver = function(d)
+                                                  {
+                                                      SetChangeCountry({
+                                                        country_Name:'world',
+                                                        flag:true
+                                                      })
+                                                      if(ChangeCountry.flag){
+                                                      d3.select("#Change_Country_Button")
+                                                      .attr('disabled',true)
+                                                      }
+                                                  }
+                                                  let ChangeCountryByButton_India = function(d){
+                                                    SetChangeCountry({
+                                                      country_Name:'india',
+                                                      flag:true
+                                                    })
+                                                    if(ChangeCountry.flag){
+                                                    d3.select("#Change_Country_Button_India")
+                                                    .attr('disabled',true)
+                                                    }
+                                                  }
                                                   // console.log("error","topo",todo)
                                                   let mouseLeave = function(d) 
                                                                     {
@@ -186,6 +264,7 @@ function TestMap (props){
                                                                     }
                                                   let onClick = function(d)
                                                                     {
+                                                                      if(region!=='world'){
                                                                       d3.selectAll('.State')
                                                                       .transition()
                                                                       .duration(200)
@@ -200,6 +279,7 @@ function TestMap (props){
                                                                         Region_Name:(d.properties.st_nm).replace(" ","").toLowerCase()
                                                                 
                                                                       })
+                                                                    }
                                                                     }
                                                     let onTouch= function(d){
                                                       d3.select('.State')
@@ -228,30 +308,37 @@ function TestMap (props){
                                                   .attr("fill", function (d,i) {
                                                     
                                                     d.total = data.get(d.id) || 0;
-                                                    // console.log(region)
-                                                    
+                                                    console.log(region)
+                                                    if(region==='world')
+                                                    return d3.interpolatePiYG((i)/1000)
+
                                                     return d3.interpolatePRGn(d.properties.st_code/100)
-                                                    
                                                   })
                                                   
                                                   .style("stroke",Stroke_Color_for_Map)
-                                                  .attr("class", function(d){ return (d.properties.st_nm).replace(" ","").toLowerCase() } )
+                                                  // .attr("class", function(d){ return (d.properties.st_nm).replace(" ","").toLowerCase() } )
                                                   // .attr("id",function(d){
                                                   //   return d.properties.st_nm
                                                   // })
+                                                  .attr("class","world")
                                                   .style("opacity", .8)
                                                   .on("mouseover", mouseOver )
                                                   .on("mouseleave", mouseLeave )
                                                   .on("click",onClick)
                                                   .on('touchstart',onTouch)
 
-                                                  
+                                                    d3.select('#Change_Country_Button')
+                                                    .on('click',ChangeCountryMouseOver)
+
+                                                    // d3.select('#ChangeCountryByButton_India')
+                                                    // .on('click',ChangeCountryByButton_India)
+
                                         }
                         
                                      
                               }
   // console.log(this.state.stateName,"stafdcg")
-  if(Region.Region_Name==='india'){
+  if(props.MapRegion==='india'){
   return(
     <div data={state_Name.Confrim}>
       {/* <h2 style={{color:'white'}}>{state_Name.state_Name}</h2> */}
@@ -262,6 +349,16 @@ function TestMap (props){
     
     </div>
   )}
+  else if(props.MapRegion==='world')
+  {
+    return (
+    <div data={Global.total_confirm}>
+    <Display state_Name={Global.country_Name} Confirm={Global.total_confirm}
+        ActiveCases={Global.total_Active} Recoverd={Global.total_recoverd}
+        Death={Global.total_death}/>
+        </div>
+    )
+  }
     else {
       return(
         <div>

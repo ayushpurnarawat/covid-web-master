@@ -5,7 +5,7 @@ function Display(props){
     
    
     
-    console.log(props)
+    // console.log(props)
     return(
         <div>
         <h2 style={{color:'white'}} id="state_data">{props.state_Name}</h2>

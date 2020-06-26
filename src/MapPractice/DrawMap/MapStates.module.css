@@ -296,7 +296,8 @@
     display: flex;
     /* justify-content: space-between; */
     height: 15%;
-    overflow: auto;
+    margin-top: 1%;
+    /* overflow: auto; */
 }
 .Cell_Data{
     background-color: aliceblue;

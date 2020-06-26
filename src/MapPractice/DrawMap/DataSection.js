@@ -21,6 +21,7 @@ function DataSection(props)
     return <div className={SpinnerClass.loader} >Loading</div>
     return(
         <div>
+            <button>Helllo</button>
             <Suspense fallback={<div className={SpinnerClass.loader}></div>}>
         <MapStates ResponseData={cases_time_series}/>
         </Suspense>

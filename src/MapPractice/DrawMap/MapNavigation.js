@@ -1,17 +1,14 @@
 import React, { useRef } from 'react'
 import * as d3 from 'd3'
 function MapNavigation(Region,response,MapName){
-    
-    if(navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(getPosi)
-    }
-    function getPosi(position){
-        // console.log(position)
-    }
+    // console.log(response.data[2]["Total Cases_text"])
+   
     // console.log(response)
     var data= {
         ...response.data.statewise
+    }
+    var country_response={
+        ...response.data
     }
     // var svg = useRef(null)
     //     console.log(svg)
@@ -31,6 +28,24 @@ function MapNavigation(Region,response,MapName){
             ]
         }
     }
+    }
+    else if(MapName==='world')
+    {
+        for(var key in country_response)
+        {
+            
+            if(response.data[key].Country_text===Region.name)
+            {
+                return [response.data[key].Country_text,
+                        response.data[key]['Total Cases_text'],
+                        response.data[key]['Active Cases_text'],
+                        response.data[key]['Total Recovered_text'],
+                        response.data[key]['Total Deaths_text']
+
+                ]
+            }
+        }
+        
     }
     else{
         var state_name_response = Region.st_nm 
