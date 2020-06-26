@@ -115,7 +115,7 @@ function TableData(props){
             style={{height:'30%'}}
             >
             
-            <div className={classes.Cell_Data} style={{width:"50%",height:'30%'}} >{props.data.statewise[key].state}</div>
+            <div className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{props.data.statewise[key].state}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].confirmed}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].active}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].recovered}</div>

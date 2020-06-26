@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import SpinnerClass from './Spinner.module.css'
-import MapStates from './MapStates'
+// import MapStates from './MapStates'
 import useSWR from 'swr'
-
+const MapStates = React.lazy(()=>import('./MapStates'))
 function DataSection(props)
 {
     
@@ -21,7 +21,9 @@ function DataSection(props)
     return <div className={SpinnerClass.loader} >Loading</div>
     return(
         <div>
+            <Suspense fallback={<div className={SpinnerClass.loader}></div>}>
         <MapStates ResponseData={cases_time_series}/>
+        </Suspense>
         {ResponseData}
         </div>
     )
