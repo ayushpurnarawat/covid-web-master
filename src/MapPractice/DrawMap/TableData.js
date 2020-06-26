@@ -13,6 +13,24 @@ function TableData(props){
         deaths:'',
         toggel:false
     })
+    function onTouch(event){
+        var ID= parseInt(event.target.id)
+        var d=props.data["statewise"]
+
+        if(!isNaN(ID)){
+            // console.log(d[ID],"===",ID)
+            
+            SetStateData({
+                State_name:d[ID].state,
+                Confirmed:d[ID].confirmed,
+                recovered:d[ID].recovered,
+                active:d[ID].active,
+                deaths:d[ID].deaths,
+                toggel:true
+    
+            })
+        }
+    }
     function ch(event){
         var ID= parseInt(event.target.id)
         console.log(ID)
@@ -39,7 +57,8 @@ function TableData(props){
         // .duration(100)
         // .style("stroke", "transparent")
         console.log(StateData.State_name)
-        d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
+        d3.selectAll(("."+(StateData.State_name).replace(" ","").toLowerCase()))
+        // d3.selectAll(".rajasthan")
             .transition()
             .duration(200)
             .style("stroke","transparent")
@@ -64,7 +83,9 @@ function TableData(props){
         d3.select("#state_data")
         .text(StateData.State_name)
             console.log((StateData.State_name).replace(" ","").toLowerCase())
-        d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
+        // d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
+        d3.selectAll(("."+(StateData.State_name).replace(" ","").toLowerCase()))
+        // d3.selectAll(".rajasthan")
                     // .transition()
                     // .duration(200)
                     // .style("opacity", .5)
@@ -89,11 +110,12 @@ function TableData(props){
             confirmed={props.data.statewise[key].confirmed}
 
             onMouseOver={(event)=>ch(event)}
-            onTouchStart={ch}
+            onTouchStart={onTouch}
             onMouseLeave={(event)=>MouseLeave(event)}
+            style={{height:'30%'}}
             >
             
-            <div className={classes.Cell_Data} style={{width:"50%"}}>{props.data.statewise[key].state}</div>
+            <div className={classes.Cell_Data} style={{width:"50%",height:'30%'}} >{props.data.statewise[key].state}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].confirmed}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].active}</div>
             <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].recovered}</div>

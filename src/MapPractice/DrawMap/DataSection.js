@@ -1,5 +1,5 @@
 import React from 'react'
-
+import SpinnerClass from './Spinner.module.css'
 import MapStates from './MapStates'
 import useSWR from 'swr'
 
@@ -18,7 +18,7 @@ function DataSection(props)
     
     // console.log(cases_time_series)
     if(!cases_time_series)
-    return <div>Loadind</div>
+    return <div className={SpinnerClass.loader} >Loading</div>
     return(
         <div>
         <MapStates ResponseData={cases_time_series}/>

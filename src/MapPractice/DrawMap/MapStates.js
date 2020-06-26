@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import TestMap from './ma'
+import React, { Component, Suspense } from 'react'
+// import TestMap from './ma'
 import classes from './MapStates.module.css'
 import LoliPopChart from '../../FinaleChart/LolliPopChart'
-import TableData from './TableData'
+// import TableData from './TableData'
+import SpinnerClass from './Spinner.module.css'
 import Events from './Events'
-
-
+const TableData = React.lazy(()=>import('./TableData'))
+const TestMap = React.lazy(()=>import('./ma'))
 var size =0
 class MapStates extends Component{
     state = {
@@ -113,16 +114,18 @@ class MapStates extends Component{
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Recover</div>
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Deaths</div>
                         </div>
-                        
+                <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                         <TableData data={this.props.ResponseData}/>
+                        </Suspense>
                     </div>
                     
                 </div>
                 <div id="MapSection" className={classes.MapSection} >
                 
                     <div id="Map_data" className={classes.Map_data}>
+                        <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                     <TestMap MapRegion={"india"}/>
-
+                    </Suspense>
                     </div>
                     {/* <div id="MapVisuality"></div> */}
 
