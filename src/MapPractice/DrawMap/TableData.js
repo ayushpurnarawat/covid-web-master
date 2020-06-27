@@ -63,6 +63,20 @@ function TableData(props){
             })
     }
     }
+    function CountryMouseLeave(){
+        try{
+            var country = ((CountryData.Country_text).replace(" ","").toLowerCase())
+            d3.selectAll("."+country)
+            // d3.selectAll(".rajasthan")
+                .transition()
+                .duration(200)
+                .style("stroke","transparent")
+            }
+            catch{
+                console.log("SelectorCatch")
+            }
+    }
+
     useEffect(()=>{
         d3.select("#confirm_data")
             .text(CountryData.Total_Confirm)
@@ -74,7 +88,22 @@ function TableData(props){
         .text(CountryData.Total_Death)
         d3.select("#state_data")
         .text(CountryData.Country_text)
+
+        var country = ((CountryData.Country_text).replace(" ","").toLowerCase())
+        console.log(country)
+        try{
+        d3.selectAll("."+country)
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                    .style("stroke", "red")
+        }
+        catch{
+            console.log("error")
+        }
     },[CountryData])
+
+
     function ch(event){
         var ID= parseInt(event.target.id)
         // console.log(event)
@@ -171,7 +200,7 @@ function TableData(props){
             
                         onMouseOver={(event)=>WorldMouseOver(event)}
                         onTouchStart={onTouch}
-                        onMouseLeave={(event)=>MouseLeave(event)}
+                        onMouseLeave={(event)=>CountryMouseLeave(event)}
                         style={{height:'30%'}}
                         >
                         

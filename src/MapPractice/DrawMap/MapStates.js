@@ -134,7 +134,7 @@ class MapStates extends Component{
                 <div id="MapSection" className={classes.MapSection} >
                     <div id="Map_data" className={classes.Map_data}>
                     {/* <button onClick={this.ChangeCountryByButton_India} id="ChangeCountryByButton_India">India</button> */}
-                    <button onClick={this.ChangeCountryByButton} id="Change_Country_Button" className='Change_Country_Button'>GLobal</button>
+                    <button onClick={this.ChangeCountryByButton} id="Change_Country_Button" className='Change_Country_Button'>GLobal(Double Click)</button>
 
                         <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                     <TestMap MapRegion={this.state.Country}/>

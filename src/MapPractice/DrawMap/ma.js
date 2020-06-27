@@ -325,11 +325,16 @@ function TestMap (props){
                                                   })
                                                   
                                                   .style("stroke",Stroke_Color_for_Map)
-                                                  // .attr("class", function(d){ return (d.properties.st_nm).replace(" ","").toLowerCase() } )
+                                                  .attr("class", function(d){ 
+                                                  
+                                                    if(region==='world')
+                                                    return (d.properties.name).replace(" ","").toLowerCase()
+                                                    else
+                                                    return (d.properties.st_nm).replace(" ","").toLowerCase() } )
                                                   // .attr("id",function(d){
                                                   //   return d.properties.st_nm
                                                   // })
-                                                  .attr("class","world")
+                                                  // .attr("class","world")
                                                   .style("opacity", .8)
                                                   .on("mouseover", mouseOver )
                                                   .on("mouseleave", mouseLeave )

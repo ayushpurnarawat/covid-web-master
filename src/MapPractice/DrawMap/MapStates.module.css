@@ -312,6 +312,10 @@
     justify-content: center;
 
 }
+.Change_Country_Button{
+    width: 100px;
+    height: 2%;
+}
 @media(max-width:600px){
     .MapSection{
         width: 100%;
