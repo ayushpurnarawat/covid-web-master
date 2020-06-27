@@ -124,9 +124,10 @@ class MapStates extends Component{
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Recover</div>
                             <div className={classes.Cell_Heading} style={{width:'12.5%'}}>Deaths</div>
                         </div>
+                
                 <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
-                        <TableData data={this.props.ResponseData}/>
-                        </Suspense>
+                        <TableData data={this.props.ResponseData} MapRegion={this.state.Country}/>
+                </Suspense>
                     </div>
                     
                 </div>

@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 import Axios from 'axios'
 import MapNavigation from './MapNavigation'
 import Classes from './TestMap.module.css'
+import MapStateclasses from './MapStates.module.css'
 
 // import DataSection from './DataSection'
 
@@ -12,7 +13,7 @@ import Display from './Display'
 // var stat= null
 var Response = {}
 function TestMap (props){
-    console.log(props.MapRegion)
+    // console.log(props.MapRegion)
           const [ChangeCountry,SetChangeCountry] =useState({
             country_Name:'',
             flag:false
@@ -27,7 +28,7 @@ function TestMap (props){
           
           });
           useEffect(()=>{
-            console.log("ChangeCountry")
+            // console.log("ChangeCountry")
             if(props.MapRegion==='world')
             map(ChangeCountry.country_Name)
           },[ChangeCountry])
@@ -40,7 +41,7 @@ function TestMap (props){
 
           })
           useEffect(()=>{
-            console.log("Global_Effect")
+            // console.log("Global_Effect")
           },[Global])
           const [ToggleMap,SetToggleMap]=useState({
             ChangeMap:false
@@ -50,7 +51,7 @@ function TestMap (props){
           })
           
           useEffect(()=>{
-            console.log("2nd Effect")
+            // console.log("2nd Effect")
             SetToggleMap({
               ChangeMap:true
             })
@@ -85,7 +86,7 @@ function TestMap (props){
                 function map(region){
                           
                                 // console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
-                                console.log(region)
+                                // console.log(region)
                                 var MapType = 'MapSection'
                                 
                                 if(region!=='india'){
@@ -141,11 +142,11 @@ function TestMap (props){
                                   // console.log(topology)
                               })
 
-                              
                           
                                         function ready(todo) 
                                         {
-                                         
+                                          // console.log(Response)
+
                                           if(region!=='india')
                                           var Stroke_Color_for_Map ='black'
                                           var projection = d3.geoMercator()
@@ -174,6 +175,14 @@ function TestMap (props){
                                                       .style("opacity", 1)
                                                       .style("stroke", "black")
                                                     // console.log(d)
+                                                    try{
+                                                    d3.selectAll("#2")
+                                                      .text("helllo")
+                                                    }
+                                                    catch{
+                                                      // console.log("Selector")
+                                                    }
+                                          
                                                     // stat = d.properties.st_nm
                                                     if(region==='india')
                                                     {
@@ -308,7 +317,7 @@ function TestMap (props){
                                                   .attr("fill", function (d,i) {
                                                     
                                                     d.total = data.get(d.id) || 0;
-                                                    console.log(region)
+                                                    // console.log(region)
                                                     if(region==='world')
                                                     return d3.interpolatePiYG((i)/1000)
 
