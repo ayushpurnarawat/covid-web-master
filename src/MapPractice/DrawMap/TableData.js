@@ -6,7 +6,7 @@ import Spinner from './Spinner.module.css'
 import useSWR from 'swr'
 import {Link,Router} from 'react-router-dom'
 function TableData(props){
-    console.log("TableData")
+    // console.log("TableData")
     var districtDataArrat ={}
     var Button_AddedArrat = []
     const [StateData,SetStateData] =useState({
@@ -32,7 +32,7 @@ function TableData(props){
     const {data} = useSWR(props.Link,url=>
             fetch(url)
             .then(res=>{
-                console.log(res)
+                // console.log(res)
                 return res.json()
             })
         )
@@ -168,7 +168,7 @@ function TableData(props){
        
 
         // console.log(event.target.id)
-        console.log(data.statewise)
+        // console.log(data.statewise)
         var d=data["statewise"]
 
         if(!isNaN(ID)){
@@ -264,7 +264,8 @@ function TableData(props){
             }
         
     }
-    else
+    else{
+        try{
     for(var key in data.statewise)
     {
         
@@ -294,6 +295,11 @@ function TableData(props){
             
         }
     }
+    }
+    catch{
+
+    }
+}
     if(!data)
     return <div className={Spinner.loader}></div>
     return(

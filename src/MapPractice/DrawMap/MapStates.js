@@ -55,7 +55,7 @@ class MapStates extends Component{
    
     render()
     {
-        console.log("MapStates")
+        // console.log("MapStates")
         return(
             <div id="MapStates" className={classes.main}>
                 <div id='DataSection' className={classes.DataSection} >
@@ -109,7 +109,7 @@ class MapStates extends Component{
                     
                     
                     </div>
-                    <div style={{width:'100%',height:'80%',marginTop:'110%'}} id="BarCharts">
+                    <div style={{width:'100%',height:'410px',marginTop:'110%'}} id="BarCharts">
                     <Suspense fallback={<div className={SpinnerClass.loader}></div>}> 
                      <BarChart 
                             
@@ -122,15 +122,39 @@ class MapStates extends Component{
                     </Suspense>
                     
                     </div>
-                    <div style={{width:'100%',height:'80%',marginTop:'110%'}} id="Chart">
+                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailyConfirmChart">
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
                             WorldResponse = {this.props.WorldData}
                             IndiaResponse = {this.props.ResponseData}
+                            Type={"dailyconfirmed"}
+                            TypeID={"DailyConfirmChart"}
+                            background={"rgb(245, 74, 42,.5)"}
                         />
                     </div>
-
+                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailyRecoverdChart">
+                        <Chart 
+                            Link={this.state.Link}
+                            MapRegion={this.state.Country}    
+                            WorldResponse = {this.props.WorldData}
+                            IndiaResponse = {this.props.ResponseData}
+                            Type={"dailyrecovered"}
+                            TypeID={"DailyRecoverdChart"}
+                            background={"rgb(120, 209, 109,.5)"}
+                        />
+                    </div>
+                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailydeceasedChart">
+                        <Chart 
+                            Link={this.state.Link}
+                            MapRegion={this.state.Country}    
+                            WorldResponse = {this.props.WorldData}
+                            IndiaResponse = {this.props.ResponseData}
+                            Type={"dailydeceased"}
+                            TypeID={"DailydeceasedChart"}
+                            background={"rgb(106, 192, 198,.5)"}
+                        />
+                    </div>
                 </div>
                
             </div>

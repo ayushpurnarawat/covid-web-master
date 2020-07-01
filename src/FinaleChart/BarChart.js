@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as d3 from 'd3'
 
 function BarChart(props){
-    console.log("BarChart")
+    // console.log("BarChart")
     const [TopEffectedState,SetTopEffectedState] = useState({
         EffectedState:[]
     })
@@ -66,9 +66,9 @@ function BarChart(props){
                  return parseInt(a.ConfimrCases.replace(",","").replace(",","")) -parseInt(b.ConfimrCases.replace(",","").replace(",",""))
              })
         }
-    d3.select("#MapSection")
+    d3.select("#BarChart")
         .select('svg').remove()
-    var svg = d3.select("#MapSection")
+    var svg = d3.select("#BarChart")
         .append('svg')
         .attr("width","500px")
         .attr("height","400px")
@@ -141,7 +141,7 @@ function BarChart(props){
     // return <div className={SpinnerClass.loader} >Loading</div>
     
     return(
-        <div id="BarChart">
+        <div id="BarChart" style={{height:"410px",width:"100%"}}>
             
         </div>
     )

@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import classes from './MapStates.module.css'
 import SpinnerClass from './Spinner.module.css'
 function TotalData(props){
-    console.log("TatalDATA")
+    // console.log("TatalDATA")
     const {data} =useSWR(props.Link,url=>{
         fetch(url)
         .then(res=>{

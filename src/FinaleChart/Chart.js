@@ -1,11 +1,13 @@
 import React from 'react'
 import * as d3 from 'd3'
 import useSWR from 'swr'
+import { select } from 'd3'
 var TimeConv = d3.timeParse('%d %B %Y')
 
 function Chart(props)
 {
-    console.log("Chart")
+    // console.log("Chart",props.Type)
+    var t =props.Type
     var DataForChart =[]
 
     const  {data} =useSWR("https://api.covid19india.org/data.json",url=>
@@ -14,8 +16,8 @@ function Chart(props)
         res.json()
     }))
     // var data=true
-    
-    
+    if(props.MapRegion==='india'){
+    if(props.Type==="dailyconfirmed")
         for(var key in props.IndiaResponse.cases_time_series)
         {
             DataForChart.push({
@@ -23,25 +25,70 @@ function Chart(props)
                 Confirm:props.IndiaResponse.cases_time_series[key].dailyconfirmed
             })
         }
-        
+    else if(props.Type==="dailyrecovered")  
+    {
+        for(var key in props.IndiaResponse.cases_time_series)
+        {
+            DataForChart.push({
+                Date:props.IndiaResponse.cases_time_series[key].date,
+                Confirm:props.IndiaResponse.cases_time_series[key].dailyrecovered
+            })
+        }
+    }
+    else if(props.Type==="dailydeceased")
+    {
+        for(var key in props.IndiaResponse.cases_time_series)
+        {
+            DataForChart.push({
+                Date:props.IndiaResponse.cases_time_series[key].date,
+                Confirm:props.IndiaResponse.cases_time_series[key].dailydeceased
+            })
+        }
+    }
+    }
+    else if(props.MapRegion==='world')
+    {
+        // if(props.Type==="dailyconfirmed")
+        // {
+        //     for(var key in props.WorldResponse)
+        // {
+        //     DataForChart.push({
+        //         Date:props.WorldResponse[key]["Last Update"],
+        //         Confirm:props.WorldResponse[key]["Total Cases_text"]
+        //     })
+        // }
+        // }
+
+    }
+    function mouseover(d)
+    {
+        // console.log(d)
+        d3.select(`.January${props.TypeID}`)
+        .attr("stroke","green")
+        d3.select(this)
+        .attr("stroke",function(d,i){
+            console.log(d[i].Confirm)
+            return ["orange","green","red"]
+        })
+    }
+        // d3.select("#ChartS")
+        // .select("svg")
+        // .remove()
     
-        d3.select("#Chart")
-        .select("svg")
-        .remove()
-    
-        d3.select("#Chart")
+        d3.select(`#${props.TypeID}`)
             .select("svg").remove()
-    var svg =d3.select("#Chart")
+        var svg =d3.select(`#${props.TypeID}`)
         .append("svg")
-        .attr("height","400px")
-        .attr("width","300px")
-        .attr("fill","rgb(232,143,123)")
+        .attr("height","250px")
+        .attr("width","500px")
+        .style("background-color",props.background)
+        .style("border-radius","5px")
     var X_AXIS = d3.scaleUtc()
-                .range([0,250])
+                .range([0,430])
                 .domain(d3.extent(DataForChart,function(d){
                     var month = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
                     var date = TimeConv(d.Date+"2020")
-                    var fulldate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()
+                    // var fulldate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()
                     return date}))
               
     var scale = d3.axisBottom(X_AXIS)
@@ -50,26 +97,30 @@ function Chart(props)
         
         svg.append("g")
         .call(scale)
-        .attr("transform","translate(20,250)")
+        .attr("transform","translate(50,200)")
            
 
     var Y_AXIS = d3.scaleLinear()
-                .range([250,0])
-                // .domain([0,d3.max(DataForChart,function(d){
-                //     console.log(d.Confirm)
-                //     return d.Confirm
-                // })])
-                .domain([0,25000])
+                .range([200,0])
+                .domain([0,d3.max(DataForChart,function(d){
+                    console.log((d.Confirm).replace(",","").replace(",",""))
+                    return parseInt((d.Confirm).replace(",","").replace(",",""))
+                })])
+                // .domain([0,25000])
         svg.append("g")
-            .call(d3.axisLeft(Y_AXIS))
+            .call(d3.axisLeft(Y_AXIS).ticks(10,"~s"))
             .attr("transform","translate(40,0)")
             
         svg.append("path")
             .datum(DataForChart)
-            .attr("fill","red")
-            .attr("stroke","green")
+            .attr("fill","rgb(209,141,128,.5)")
+            .attr("stroke","black")
             .attr("stroke-width","1.5")
+            .attr("transform","translate(40,0)")
+            .attr("width","400px")
             .attr("d",d3.area()
+        
+
             .x(function(d){
                  
                 var month = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
@@ -77,13 +128,20 @@ function Chart(props)
                 return X_AXIS(date)})
             .y0(Y_AXIS(0))
             .y1(function(d){
-                return Y_AXIS(d.Confirm)})
+                return Y_AXIS((d.Confirm).replace(",","").replace(",",""))})
             )
+            .attr("class",function(d,i){
+                var month = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
+
+                console.log(month[i])
+                return month[i]+props.TypeID
+            })
+            .on("mouseover",mouseover)
     
     if(!data)
     return <div></div>
     return(
-        <div>
+        <div id={"ChartS"}>
 
         </div>
     )

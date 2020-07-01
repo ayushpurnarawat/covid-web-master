@@ -69,7 +69,7 @@ var l =true
 // }
 function DataSection(props)
 {
-    console.log("DataSection")
+    // console.log("DataSection")
     var ResponseData=''
     
     const {data:cases_time_series} = useSWR(India_URl,fetcher)

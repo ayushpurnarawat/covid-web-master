@@ -13,7 +13,7 @@ import Display from './Display'
 var Response = {}
 function TestMap (props){
     var myref = useRef(null)
-    console.log("TEstMAp")
+    // console.log("TEstMAp")
           const [ChangeCountry,SetChangeCountry] =useState({
             country_Name:'',
             flag:false
@@ -94,7 +94,7 @@ function TestMap (props){
                 function map(region){
                           
                                 // console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
-                                console.log(region)
+                                // console.log(region)
                                 var MapType = 'MapSection'
                                 
                                 if(region!=='india'){
