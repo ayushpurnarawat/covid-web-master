@@ -100,12 +100,12 @@ class MapStates extends Component{
                         />
                     </Suspense>
                     <div id="Map_data" className={classes.Map_data}>
-                    {/* <button 
+                    <button 
                         onClick={()=>this.ChangeCountryByButton(this.state.Country,this.state.Link)} 
                         id="Change_Country_Button" 
                          className='Change_Country_Button'>
                              {SwitchMap}(Click To Switch)
-                    </button> */}
+                    </button>
                         
                      
                     </div>
