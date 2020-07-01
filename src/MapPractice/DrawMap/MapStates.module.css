@@ -65,13 +65,14 @@
 .CurrentData{
     display:flex;
     flex-direction:row;
-    height:150px;
+    height:30%;
     margin-top:10%;
+    width: 100%;
 }
 .ConfirmCases{
     background-color: aliceblue;
-    width: 130px;
-    height: 160px;
+    width: 25%;
+    height: 100%;
     margin-left: 1%;
     border-radius: 8px;
     /* padding: 10px; */
@@ -79,7 +80,7 @@
     box-shadow: 0 24px 25px rgb(0,0,0,.5);
     display: flex;
     /* float: left; */
-    align-items: baseline;
+    /* align-items: baseline; */
     flex-direction: column;
 }
 .ConfirmCases_HighLight{
@@ -112,8 +113,8 @@
 
 .Recover{
     background-color: aliceblue;
-    width: 130px;
-    height: 160px;
+    width: 25%;
+    height: 100%;
     margin-left: 1%;
     /* margin-top: -17%; */
     display: flex;
@@ -147,9 +148,9 @@
 }
 .ActiveCases{
     background-color: aliceblue;
-    width: 130px;
+    width: 25%;
     opacity: .4;
-    height: 160px;
+    height: 100%;
     margin-left: 1%;
     border-radius: 8px;
     /* padding: 10px; */
@@ -181,8 +182,8 @@
 }
 .Deceased{
     background-color: aliceblue;
-    width: 130px;
-    height: 160px;
+    width: 25%;
+    height: 100%;
     /* margin-top: -17%; */
     display: flex;
     align-items: baseline;
@@ -225,10 +226,8 @@
 
 .Map_data{
     width: 100%;
-    height: 100px;
+    height: 100%;
     
-    
-
 }
 
 .LoliPopChart{
@@ -265,9 +264,10 @@
 
 
 .TableView{
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     overflow: auto;
+    
     margin-top: 5%;
     margin-left: 1%;
     display: flex;
@@ -281,8 +281,8 @@
 .Table_Row_Heading{
     display: flex;
     /* justify-content: space-between; */
-    height: 10%;
-    margin-left: 1%;
+    height: 15%;
+    /* margin-left: 1%; */
     
     /* flex-direction: row; */
     /* flex-wrap: wrap; */
@@ -290,7 +290,7 @@
 .Cell_Heading{
     
     background-color:rgb(50, 71, 129);
-    border-radius: 5px;
+    border-radius: 5%;
     /* height: 3%; */
     opacity: 1 ;
     color: white;
@@ -335,6 +335,8 @@
     
         /* flex-direction: column-reverse; */
         display: flex;
+        flex-direction: row;
+
         flex-wrap: wrap;
         margin-left: 0%;
         /* width: 100%;
@@ -343,16 +345,16 @@
 }
 @media(max-width:600px){
     .DataSection{
-        flex-direction: column-reverse;
+        flex-direction: column;
         width: 100%;
-        height: 50%;
+        height: 100%;
     }
     
 }
 
 @media(max-width:600px){
         .main{
-            flex-direction: column-reverse;
+            flex-direction: column;
             /* flex-wrap: wrap-reverse; */
             /* overflow: auto; */
         }
@@ -362,11 +364,12 @@
 @media(max-width:600px){
     .TableView{
         margin-left: -0.5%;
+        width: 120%;
     }
 }
 @media(max-width:600px){
-    .CurrentData{
-        display: none;
+    .Cell_Heading{
+        
     }
 }
 @media(max-width:600px){
@@ -376,3 +379,9 @@
     }
 }
 
+@media(max-width:600px){
+    .Map_data{
+        display: flex;
+        flex-direction: row;
+    }
+}

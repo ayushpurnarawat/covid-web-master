@@ -6,6 +6,15 @@ function BarChart(props){
     const [TopEffectedState,SetTopEffectedState] = useState({
         EffectedState:[]
     })
+    var innerWidth =window.innerWidth
+    if(innerWidth<600)
+    {
+        innerWidth=innerWidth-80
+    }
+    else
+    {
+        innerWidth=460
+    }
     var TopEffectedStateArray = []
     // const  {data} =useSWR(`${props.Link}`,url=>
     // fetch(url)
@@ -70,11 +79,11 @@ function BarChart(props){
         .select('svg').remove()
     var svg = d3.select("#BarChart")
         .append('svg')
-        .attr("width","500px")
+        .attr("width","100%")
         .attr("height","400px")
     console.log(svg)
     var X_AXIS = d3.scaleBand()
-            .range([0,400])
+            .range([0,innerWidth])
             .domain(TopEffectedStateArray.map(function(d){
                 
                 return d.State_Name

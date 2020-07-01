@@ -154,22 +154,33 @@ function TestMap (props){
                                         function ready(todo) 
                                         {
                                           // console.log(Response)
-
+                                          var innerWidth = window.innerWidth
+                                          var innerHeight = window.innerHeight
+                                          if(innerWidth>1000)
+                                          {
+                                            innerWidth=360
+                                            innerHeight=380
+                                          }
+                                          else{
+                                            innerWidth=450
+                                            innerHeight=450
+                                          }
                                           if(region!=='india')
                                           var Stroke_Color_for_Map ='black'
                                           var projection = d3.geoMercator()
-                                            .fitSize([320,450],todo)
+                                            .fitSize([360,360],todo)
                                           var path = d3.geoPath(projection)
 
                                           // console.log(todo)
                                           var svg = d3.select(`#Map_data`)
                                           .append('svg')
-                                          // .attr('width','500px')
-                                          // .attr('height','600px')
+                                          // .attr('width','80%')
+                                          // .attr('height','50%')
                                           .attr('viewBox',"0 0 400 400")
-                                          .attr("margin-left","5px")
+                                          .attr("margin-left","1px")
                                           .attr("id",`the_SVG_ID_${MapType}`)
                                           .attr("class",classes.SVG_FOR_MAP)
+                                          .style("margin-top","10%")
                                           // .style('position','absolute')
                                           
                                                   let mouseOver = function(d) {

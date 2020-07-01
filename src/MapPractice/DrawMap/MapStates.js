@@ -91,25 +91,28 @@ class MapStates extends Component{
 
                 </div>
                 <div id="MapSection" className={classes.MapSection} >
-                    <div id="Map_data" className={classes.Map_data}>
-                    <button 
-                        onClick={()=>this.ChangeCountryByButton(this.state.Country,this.state.Link)} 
-                        id="Change_Country_Button" 
-                         className='Change_Country_Button'>
-                             {SwitchMap}(Click To Switch)
-                    </button>
-
-                        <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
+                <div style={{display:'flex',flexDirection:"column",marginTop:"10%",height:"50%"}}>
+                <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                     <TestMap 
                         MapRegion={this.state.Country}
                         WorldResponse = {this.props.WorldData}
                             IndiaResponse = {this.props.ResponseData}
                         />
                     </Suspense>
-                    
-                    
+                    <div id="Map_data" className={classes.Map_data}>
+                    {/* <button 
+                        onClick={()=>this.ChangeCountryByButton(this.state.Country,this.state.Link)} 
+                        id="Change_Country_Button" 
+                         className='Change_Country_Button'>
+                             {SwitchMap}(Click To Switch)
+                    </button> */}
+                        
+                     
                     </div>
-                    <div style={{width:'100%',height:'410px',marginTop:'110%'}} id="BarCharts">
+                    
+                    
+                </div>
+                    <div style={{width:'100%',height:'410px',marginTop:'50%',marginLeft:"2%"}} id="BarCharts">
                     <Suspense fallback={<div className={SpinnerClass.loader}></div>}> 
                      <BarChart 
                             
@@ -122,7 +125,7 @@ class MapStates extends Component{
                     </Suspense>
                     
                     </div>
-                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailyConfirmChart">
+                    <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailyConfirmChart">
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
@@ -133,7 +136,7 @@ class MapStates extends Component{
                             background={"rgb(245, 74, 42,.5)"}
                         />
                     </div>
-                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailyRecoverdChart">
+                    <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailyRecoverdChart">
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
@@ -144,7 +147,7 @@ class MapStates extends Component{
                             background={"rgb(120, 209, 109,.5)"}
                         />
                     </div>
-                    <div style={{width:'100%',height:'400',marginTop:'2%'}} id="DailydeceasedChart">
+                    <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailydeceasedChart">
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    

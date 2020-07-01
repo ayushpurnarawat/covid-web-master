@@ -6,7 +6,15 @@ var TimeConv = d3.timeParse('%d %B %Y')
 
 function Chart(props)
 {
-    // console.log("Chart",props.Type)
+    var innerWidth =window.innerWidth
+    if(innerWidth<600)
+    {
+        innerWidth=innerWidth-80
+    }
+    else
+    {
+        innerWidth=460
+    }
     var t =props.Type
     var DataForChart =[]
 
@@ -80,11 +88,11 @@ function Chart(props)
         var svg =d3.select(`#${props.TypeID}`)
         .append("svg")
         .attr("height","250px")
-        .attr("width","500px")
+        .attr("width","100%")
         .style("background-color",props.background)
         .style("border-radius","5px")
     var X_AXIS = d3.scaleUtc()
-                .range([0,430])
+                .range([0,innerWidth])
                 .domain(d3.extent(DataForChart,function(d){
                     var month = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
                     var date = TimeConv(d.Date+"2020")
@@ -97,13 +105,13 @@ function Chart(props)
         
         svg.append("g")
         .call(scale)
-        .attr("transform","translate(50,200)")
+        .attr("transform","translate(30,200)")
            
 
     var Y_AXIS = d3.scaleLinear()
                 .range([200,0])
                 .domain([0,d3.max(DataForChart,function(d){
-                    console.log((d.Confirm).replace(",","").replace(",",""))
+                    // console.log((d.Confirm).replace(",","").replace(",",""))
                     return parseInt((d.Confirm).replace(",","").replace(",",""))
                 })])
                 // .domain([0,25000])
@@ -117,7 +125,7 @@ function Chart(props)
             .attr("stroke","black")
             .attr("stroke-width","1.5")
             .attr("transform","translate(40,0)")
-            .attr("width","400px")
+            .attr("width","50%")
             .attr("d",d3.area()
         
 

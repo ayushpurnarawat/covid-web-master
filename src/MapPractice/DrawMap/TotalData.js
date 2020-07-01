@@ -39,12 +39,12 @@ function TotalData(props){
     return(
         <div  className={classes.CurrentData}>
                                              
-                    <div className={classes.Change_Country}>
+                    {/* <div className={classes.Change_Country}>
                             <h3 style={{color:'green'}}>{totalDataArray.map(function(d){return d.Country})}</h3>
                             <div className={classes.Change_Country_HighLight}>
                                     <h3 className={classes.ConfirmCases_p}>Country</h3>
                             </div>
-                    </div>
+                    </div> */}
                     
                     <div className={classes.ConfirmCases}>
                             
