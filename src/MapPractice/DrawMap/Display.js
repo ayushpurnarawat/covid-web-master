@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Classes from './TestMap.module.css'
-var state 
+
 function Display(props){
     
    
-    
     // console.log(props)
     return(
         <div>

@@ -1,9 +1,8 @@
-import React, { useEffect ,useState} from 'react'
+import React, { useEffect ,useState, useRef} from 'react'
 import * as d3 from 'd3' 
 import Axios from 'axios'
 import MapNavigation from './MapNavigation'
-import Classes from './TestMap.module.css'
-import MapStateclasses from './MapStates.module.css'
+
 
 // import DataSection from './DataSection'
 
@@ -13,7 +12,8 @@ import Display from './Display'
 // var stat= null
 var Response = {}
 function TestMap (props){
-    // console.log(props.MapRegion)
+    var myref = useRef(null)
+    console.log("TEstMAp")
           const [ChangeCountry,SetChangeCountry] =useState({
             country_Name:'',
             flag:false
@@ -29,9 +29,12 @@ function TestMap (props){
           });
           useEffect(()=>{
             // console.log("ChangeCountry")
-            if(props.MapRegion==='world')
+            if(ChangeCountry.country_Name==='world')
             map(ChangeCountry.country_Name)
+            else
+            map("india")
           },[ChangeCountry])
+
           const [Global,SetGlobal]= useState({
             country_Name:'',
             total_Active:'',
@@ -40,14 +43,19 @@ function TestMap (props){
             total_recoverd:''
 
           })
+
           useEffect(()=>{
             // console.log("Global_Effect")
           },[Global])
+
           const [ToggleMap,SetToggleMap]=useState({
             ChangeMap:false
           })
+
           const [Region,SetRegion]=useState({
-            Region_Name:'india' //india
+            Region_Name:'india',
+            Region_Flag:true,//india,
+            statewiseMap:false
           })
           
           useEffect(()=>{
@@ -55,7 +63,7 @@ function TestMap (props){
             SetToggleMap({
               ChangeMap:true
             })
-            if(props.MapRegion!=='world')
+            if(Region.statewiseMap)
             map(Region.Region_Name)
           
                         
@@ -86,7 +94,7 @@ function TestMap (props){
                 function map(region){
                           
                                 // console.log(`WindowInner=${winWidth} and width ${widths} scalingFactor ${ScallingFactor} ==${mapHeight}}`)
-                                // console.log(region)
+                                console.log(region)
                                 var MapType = 'MapSection'
                                 
                                 if(region!=='india'){
@@ -95,12 +103,12 @@ function TestMap (props){
                                 d3.selectAll("svg").remove()
                                 
                                 MapType='MapSection'
-                                  // SetToggleMap({
-                                  //   ChangeMap:false
-                                  // })
                                   
-                                  // d3.select("#MapSection")
-                                  // .remove('svg')
+                                }
+                                else{
+                                  d3.selectAll("svg").remove()
+                                
+                                MapType='MapSection'
                                 }
                                 
                                 
@@ -154,7 +162,7 @@ function TestMap (props){
                                           var path = d3.geoPath(projection)
 
                                           // console.log(todo)
-                                          var svg = d3.select(`#${MapType}`)
+                                          var svg = d3.select(`#Map_data`)
                                           .append('svg')
                                           // .attr('width','500px')
                                           // .attr('height','600px')
@@ -202,7 +210,6 @@ function TestMap (props){
                                                   {
                                                       try{  
                                                     var[country_Name,total_confirm,total_Active,tatal_recoverd,total_death]=MapNavigation(d.properties,Response,region)
-                                                      console.log(country_Name," ",total_confirm)
 
                                                       SetGlobal({
                                                         country_Name:country_Name,
@@ -213,7 +220,6 @@ function TestMap (props){
                                                       })
                                                     }
                                                     catch{
-                                                      console.log("ERROR ACCUR",d.properties)
                                                       SetGlobal({
                                                         country_Name:d.properties.name,
                                                         total_confirm:'0',
@@ -224,7 +230,7 @@ function TestMap (props){
                                                     }
                                                   }
                                                   else{
-                                                    // console.log(Response,"mouseOver")
+                                                    try{
                                                     var [districtName,active,Confirm,death,recovered] = MapNavigation(d.properties,Response,region)
                                                       SetChangeRegion({
                                                         DistrictName:districtName,
@@ -232,22 +238,109 @@ function TestMap (props){
                                                         ConfirmCases:Confirm,
                                                         Deaths:death,
                                                         Region:region,
-                                                        recovered:recovered
+                                                        recovered:recovered,
+                                                        ChangeMap:true
+                                                        
                                                       })
+                                                    }
+                                                    catch{
+
+                                                    }
+                                                    }
+
+                                                   
+
+                                                    if(region==='world')
+                                                    {
+                                                      var TableViewHeight = document.getElementById("TableView").offsetHeight
+                                                      for(var key in Response.data)
+                                                      {
+                                                          try{
+                                                        if((Response.data[key].Country_text).replace(" ","").replace(" ","")===d.properties.name)
+                                                        {
+                                                          var CheckKey =parseInt(key)
+                                                          d3.select(`[id="${key}"]`)
+                                                            .transition()
+                                                            .duration(100)
+                                                            .style("background-color","rgb(50, 71, 170)")
+                                                            if(CheckKey>20 && CheckKey <50)
+                                                            {
+                                                              document.getElementById("TableView").scrollTo(0,(CheckKey*2)+TableViewHeight)
+                                                            }
+                                                            else if(CheckKey>51 && CheckKey<210)
+                                                            {
+                                                              document.getElementById("TableView").scrollTo(0,((CheckKey/2)*2)+TableViewHeight)
+
+                                                            }
+                                                            else{
+                                                              document.getElementById("TableView").scrollTo(10,(CheckKey-TableViewHeight))
+                                                            }
+                                                        }
+                                                        }
+                                                        catch{
+                                                          console.log(Response.data[key].Country_text,key,Response)
+                                                        }
+                                                      }
+                                                    }
+                                                    else{
+                                                      // d3.select(`#${d.properties.st_nm.replace(" ","")}_TableData`)
+                                                      // .transition()
+                                                      // .duration(100)
+                                                      // .style("background-color","green")
+                                                      
+                                                      var TableViewHeight = document.getElementById("TableView").offsetHeight
+                                                      
+
+                                                      for(var key in Response.data.statewise)
+                                                      {
+                                                        if(d.properties.st_nm===Response.data.statewise[key].state)
+                                                        {
+                                                          var CheckKey =parseInt(key)
+                                                          d3.select(`[id="${key}"]`)
+                                                            .transition()
+                                                            .duration(100)
+                                                            .style("background-color","rgb(50, 71, 170)")
+                                                          if(CheckKey>20 && CheckKey<40)
+                                                          {
+                                                            document.getElementById("TableView").scrollTo(10,(parseInt(key)*2)+TableViewHeight,"auto")
+                                                          }
+                                                          
+                                                          else{
+                                                            document.getElementById("TableView").scrollTo(10,(parseInt(key/10)-TableViewHeight),"smooth")
+
+                                                          }
+                                                        }
+                                                      }
+                                                      
+
+                                                      
                                                     }
                                                     
                                                   }
                                                   
                                                   let ChangeCountryMouseOver = function(d)
                                                   {
-                                                      SetChangeCountry({
-                                                        country_Name:'world',
-                                                        flag:true
+                                                    var country_Name,f
+                                                    if(ChangeCountry.country_Name==='world')
+                                                    {
+                                                      country_Name='india'
+                                                      f=false
+                                                    }  
+                                                    else{
+                                                      country_Name='world'
+                                                      f=true
+                                                    }
+                                                    SetChangeCountry({
+                                                        country_Name:country_Name,
+                                                        flag:f
                                                       })
-                                                      if(ChangeCountry.flag){
-                                                      d3.select("#Change_Country_Button")
-                                                      .attr('disabled',true)
-                                                      }
+                                                    SetChangeRegion({
+                                                      ChangeMap:false
+                                                    })
+                                                      // if(ChangeCountry.flag){
+                                                      // d3.select("#Change_Country_Button")
+                                                      // .attr('disabled',true)
+                                                      // }
                                                   }
                                                   let ChangeCountryByButton_India = function(d){
                                                     SetChangeCountry({
@@ -270,10 +363,42 @@ function TestMap (props){
                                                                         .transition()
                                                                         .duration(100)
                                                                         .style("stroke", "transparent")
+                                                                      if(region==='world'){
+                                                                        for(var key in Response.data)
+                                                                                {
+                                                                                    try{
+                                                                                  if((Response.data[key].Country_text).replace(" ","").replace(" ","")===d.properties.name)
+                                                                                  {
+                                                                                    d3.select(`[id="${key}"]`)
+                                                                                      .transition()
+                                                                                      .duration(100)
+                                                                                      .style("background-color","transparent")
+                                                                                      
+                                                                                  }
+                                                                                  }
+                                                                                  catch{
+                                                                                    console.log(Response.data[key].Country_text,key,Response)
+                                                                                  }
+                                                                                }
+                                                                          }
+                                                    
+                                                                          else{
+                                                                        for(var key in Response.data.statewise)
+                                                                        {
+                                                                          if(d.properties.st_nm===Response.data.statewise[key].state)
+                                                                          {
+                                                                            d3.select(`[id="${key}"]`)
+                                                                              .transition()
+                                                                              .duration(100)
+                                                                              .style("background-color","transparent")
+                                                                          }
+                                                                        }
+                                                                      
+                                                                      }
                                                                     }
                                                   let onClick = function(d)
                                                                     {
-                                                                      if(region!=='world'){
+                                                                      if(region==='india'){
                                                                       d3.selectAll('.State')
                                                                       .transition()
                                                                       .duration(200)
@@ -285,9 +410,14 @@ function TestMap (props){
                                                                       
                                                                       svg.selectAll("*").remove()
                                                                       SetRegion({
-                                                                        Region_Name:(d.properties.st_nm).replace(" ","").toLowerCase()
+                                                                        Region_Name:(d.properties.st_nm).replace(" ","").toLowerCase(),
+                                                                        statewiseMap:true
                                                                 
                                                                       })
+                                                                      // d3.select("#update")
+                                                                      // .remove()
+                                                                      // d3.select("#TableView")
+                                                                      // .append("<div><TableData/></div>")
                                                                     }
                                                                     }
                                                     let onTouch= function(d){
@@ -352,7 +482,7 @@ function TestMap (props){
                                      
                               }
   // console.log(this.state.stateName,"stafdcg")
-  if(props.MapRegion==='india'){
+  if((props.MapRegion==='india')&&(!ChangeCountry.flag)&&(!ChangeRegion.ChangeMap)){
   return(
     <div data={state_Name.Confrim}>
       {/* <h2 style={{color:'white'}}>{state_Name.state_Name}</h2> */}
@@ -363,7 +493,7 @@ function TestMap (props){
     
     </div>
   )}
-  else if(props.MapRegion==='world')
+  else if((ChangeCountry.country_Name==='world')&&(ChangeCountry.flag))
   {
     return (
     <div data={Global.total_confirm}>
@@ -376,52 +506,11 @@ function TestMap (props){
     else {
       return(
         <div>
-
-      <h2 style={{color:'white'}}>{ChangeRegion.DistrictName+"-"}{Region.Region_Name}</h2>
-        
-        <div id='map' className={classes.State_Map_Visual_Data}>
-                
-
-          {/* <div style={{display:'flex',flexDirection:'row'}}className={classes.State} data={"ayush"} id="ayush"> */}
+          <Display state_Name={ChangeRegion.DistrictName} Confirm={ChangeRegion.ConfirmCases}
+        ActiveCases={ChangeRegion.ActiveCases} Recoverd={ChangeRegion.recovered}
+        Death={ChangeRegion.Deaths}
+     />
       
-      <div className={Classes.Map_Data_Confirm} >
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Confirmed</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number} >
-          <h3 >{ChangeRegion.ConfirmCases}</h3>
-          </div>
-          
-      </div>
-      <div className={Classes.Map_Data_Active}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Active</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{ChangeRegion.ActiveCases}</h3>
-          </div>
-      </div>
-      
-      <div className={Classes.Map_Data_Recover}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Recoverd</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{ChangeRegion.recovered}</h3>
-          </div>
-      </div>
-
-      <div className={Classes.Map_Data_Death}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Deceased</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3>{ChangeRegion.Deaths}</h3>
-          </div>
-      </div>
-      
-    
-      </div>
       </div>
       )
     }

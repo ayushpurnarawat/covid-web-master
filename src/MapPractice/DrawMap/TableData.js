@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import classes from './MapStates.module.css'
 import * as d3 from 'd3'
-import Events from './Events'
-import Display from './Display'
+
+import Spinner from './Spinner.module.css'
 import useSWR from 'swr'
+import {Link,Router} from 'react-router-dom'
 function TableData(props){
-    // console.log(props.MapRegion,"TableData")
+    console.log("TableData")
+    var districtDataArrat ={}
+    var Button_AddedArrat = []
     const [StateData,SetStateData] =useState({
         State_name:'',
         Confirmed:'',
         recovered:'',
         active:'',
         deaths:'',
-        toggel:false
+        toggel:false,
+        ButtonAdded:null,
+        showDistrict:false
     })
+
     const [CountryData,SetCountryData]= useState({
         Country_text:'',
         Total_Confirm:'',
@@ -22,14 +28,23 @@ function TableData(props){
         Total_Death:''
     })
     var show =[]
-    const {data} = useSWR("https://covid-19.dataflowkit.com/v1",url=>
+    
+    const {data} = useSWR(props.Link,url=>
             fetch(url)
             .then(res=>{
-                
+                console.log(res)
                 return res.json()
             })
         )
+        
+    // const {data:dos} =useSWR("https://api.covid19india.org/state_district_wise.json",url=>
+    //         fetch(url)
+    //         .then(res=>{
+    //             return res.json()
+    //         })
+    //         )
     function onTouch(event){
+        // event.prevent.default();
         var ID= parseInt(event.target.id)
         var d=props.data["statewise"]
         
@@ -63,9 +78,52 @@ function TableData(props){
             })
     }
     }
+    function DistrictDataCall(event){
+        SetStateData({
+            showDistrict:true
+        })
+        
+        var district ="_district"
+        var classNameForEl = props.data.statewise[event.target.id].state
+        var checkclass = document.getElementsByClassName(district)
+
+    if(checkclass.length===0){
+         var div =document.getElementById(event.target.id)
+         var statemeta =document.getElementById("state-meta")
+    var el =  document.createElement("div")
+        el.className=district
+        el.style="display:flex;justify-content: flex-end;"
+        el.id=district
+    // el.innerText("Helllkodfj")
+    div.parentNode.insertBefore(el,div.nextSibling)
+    d3.select("."+district)
+        .append("div")
+        .attr("class",district+"_button")
+        
+        .text("More detail of"+classNameForEl)
+        .style("width","120px")
+        .style("height","40px")
+        var SelectParent =document.getElementById(district)
+        var LINK =document.createElement("Link")
+        
+        // var linkadd = new linkadd()
+    
+        
+    }
+    else if(checkclass.length ===1)
+    {
+        d3.select("."+district)
+            .remove()
+    }
+    // SetStateData({
+    //     ButtonAdded:'<Link to="/abc"><button>hello</button></Link>'
+    // })
+    Button_AddedArrat.push(<Link to="/abc"><button>hello</button></Link>)
+    }
+    
     function CountryMouseLeave(){
         try{
-            var country = ((CountryData.Country_text).replace(" ","").toLowerCase())
+            var country = ((CountryData.Country_text).replace(" ","").replace(" ","")+"TableData")
             d3.selectAll("."+country)
             // d3.selectAll(".rajasthan")
                 .transition()
@@ -89,14 +147,15 @@ function TableData(props){
         d3.select("#state_data")
         .text(CountryData.Country_text)
 
-        var country = ((CountryData.Country_text).replace(" ","").toLowerCase())
-        console.log(country)
+        var country = ((CountryData.Country_text).replace(" ","").replace(" ","")+"_TableData")
         try{
         d3.selectAll("."+country)
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
-                    .style("stroke", "red")
+                    .style("stroke", "blue")
+                    .text("hello")
+                    .style("color","white")
         }
         catch{
             console.log("error")
@@ -106,10 +165,11 @@ function TableData(props){
 
     function ch(event){
         var ID= parseInt(event.target.id)
-        // console.log(event)
-        // console.log(event.target.id)
+       
 
-        var d=props.data["statewise"]
+        // console.log(event.target.id)
+        console.log(data.statewise)
+        var d=data["statewise"]
 
         if(!isNaN(ID)){
         // console.log(d[ID],"===",ID)
@@ -126,11 +186,7 @@ function TableData(props){
     }
     }
    function MouseLeave(event){
-        // d3.selectAll(`.${StateData.State_name}`)
-        // .transition()
-        // .duration(100)
-        // .style("stroke", "transparent")
-        // console.log(StateData.State_name)
+        
         try{
         var state = ((StateData.State_name).replace(" ","").toLowerCase())
         d3.selectAll("."+state)
@@ -144,13 +200,7 @@ function TableData(props){
         }
     }
     useEffect(()=>{
-        // console.log('effect')
-//      return   (<Display state_Name={StateData.State_name} 
-//         Confirm={StateData.Confirmed}
-    
-//         ActiveCases={StateData.active} Recoverd={StateData.recovered}
-//     Death={StateData.deaths}
-//  />)
+     
         if(StateData.toggel){
             
         d3.select("#confirm_data")
@@ -166,13 +216,9 @@ function TableData(props){
             // console.log((StateData.State_name).replace(" ","").toLowerCase())
         // d3.selectAll(`.${(StateData.State_name).replace(" ","").toLowerCase()}`)
         var state = ((StateData.State_name).replace(" ","").toLowerCase())
-        console.log(state)
+       
         d3.selectAll("."+state)
-        // d3.selectAll(".rajasthan")
-                    // .transition()
-                    // .duration(200)
-                    // .style("opacity", .5)
-                    // d3.select(this)
+        
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
@@ -185,17 +231,17 @@ function TableData(props){
     
     if(props.MapRegion==='world')
     {
-        if(data)
-        {
-            for(key in data)
+        
+            for(var key in data)
             {
                 if(key!=='0')
                 {
+                    try{
                     show.push(
-                        <div className={classes.Table_Cell_Data} 
+                        <div className={classes.Table_Cell_Data } 
                         key={key} 
+                        // id={(data[key].Country_text).replace(" ","").replace(" ","")+"_TableData"}
                         id={key}
-                        
                         confirmed={data[key]['Total Cases_text']}
             
                         onMouseOver={(event)=>WorldMouseOver(event)}
@@ -204,60 +250,58 @@ function TableData(props){
                         style={{height:'30%'}}
                         >
                         
-                        <div className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{data[key].Country_text}</div>
-                        <div className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Cases_text']}</div>
-                        <div className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Active Cases_text']}</div>
-                        <div className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Recovered_text']}</div>
-                        <div className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Deaths_text']}</div>
+                        <div  className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{data[key].Country_text}</div>
+                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Cases_text']}</div>
+                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Active Cases_text']}</div>
+                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Recovered_text']}</div>
+                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Deaths_text']}</div>
                         </div>)
+                    }
+                    catch{
+
+                    }
                 }
             }
-        }
+        
     }
     else
-    for(var key in props.data.statewise)
+    for(var key in data.statewise)
     {
+        
         if(key!=='0')
         {
             show.push(
-            <div className={classes.Table_Cell_Data} 
-            key={props.data.statewise[key].state} 
+            <div className={"Hello",classes.Table_Cell_Data} 
+            key={data.statewise[key].state} 
+            // id={props.data.statewise[key].state+"_TableData"}
             id={key}
-            
-            confirmed={props.data.statewise[key].confirmed}
-
+            confirmed={data.statewise[key].confirmed}
+            onClick={(event)=>DistrictDataCall(event)}
             onMouseOver={(event)=>ch(event)}
             onTouchStart={onTouch}
             onMouseLeave={(event)=>MouseLeave(event)}
             style={{height:'30%'}}
             >
             
-            <div className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{props.data.statewise[key].state}</div>
-            <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].confirmed}</div>
-            <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].active}</div>
-            <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].recovered}</div>
-            <div className={classes.Cell_Data} style={{width:'12.5%'}}>{props.data.statewise[key].deaths}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{data.statewise[key].state}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].confirmed}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].active}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].recovered}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].deaths}</div>
+            {/* <div><Router> <Link to="/abc"><button>hello</button></Link></Router></div> */}
+
             </div>)
+            
         }
     }
-    // if(StateData.toggel)
-    // {
-    //     return (
-    //         <div>
-    //         <Display state_Name={StateData.State_name} 
-    //     Confirm={StateData.Confirmed}
-    
-    //     ActiveCases={StateData.active} Recoverd={StateData.recovered}
-    // Death={StateData.deaths}
-    //     />
-    //         </div>
-    //     )
-    // }
+    if(!data)
+    return <div className={Spinner.loader}></div>
     return(
         <div id="update"style={{display:'flex',flexDirection:'column'}}>
         
         {show}
-        
+        {StateData.showDistrict&&(<div id="state-meta">district</div>)}
+
         </div>
     )
 }

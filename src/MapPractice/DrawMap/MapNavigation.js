@@ -48,11 +48,11 @@ function MapNavigation(Region,response,MapName){
         
     }
     else{
+        try{
+        console.log("MapNaviGation District",response.data[Region.st_nm].districtData[Region.district].confirmed)
         var state_name_response = Region.st_nm 
         var district_name_response = Region.district
-        var DistrictData={
-            ...response.data[state_name_response].districtData
-        }
+        
         
         // console.log(DistrictData)
 
@@ -65,6 +65,10 @@ function MapNavigation(Region,response,MapName){
             response.data[state_name_response].districtData[district_name_response].deceased,
             response.data[state_name_response].districtData[district_name_response].recovered
         ]
+        }
+        catch{
+            console.log("distict fetching error")
+        }
     }
     
 }

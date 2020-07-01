@@ -4,7 +4,6 @@ import SpinnerClass from './Spinner.module.css'
 const Display = React.lazy(()=>import("./Display"))
 function Events(props){
     
-    console.log("onmouseOver",props)
     const [A,B]= useState({
         ad:''
     })
@@ -13,14 +12,14 @@ function Events(props){
     // })
     return(
         <div>      
-            <Suspense fallback={<div className={SpinnerClass.loader}></div>}>  
+            {/* <Suspense fallback={<div className={SpinnerClass.loader}></div>}>  
             <Display state_Name={props.state} 
             Confirm={props.confirmed}
         
             ActiveCases={props.active} Recoverd={props.recovered}
         Death={props.deaths}
      />
-     </Suspense>
+     </Suspense> */}
      </div>
 
     )

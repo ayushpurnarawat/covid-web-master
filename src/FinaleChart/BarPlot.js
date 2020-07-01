@@ -31,7 +31,7 @@ function BarPlot(){
     })
     console.log(val)
     console.log(TopEffectedState)
-      var svg = d3.select('#DataSection')
+      var svg = d3.select('#BarPlot')
                 .append("svg")
                 .attr("width","500px")
                 .attr("height","300px")
