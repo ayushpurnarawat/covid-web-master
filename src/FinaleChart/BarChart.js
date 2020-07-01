@@ -148,7 +148,8 @@ function BarChart(props){
     
     // if(!data)
     // return <div className={SpinnerClass.loader} >Loading</div>
-    
+    if(!data)
+    return <div></div>
     return(
         <div id="BarChart" style={{height:"410px",width:"100%"}}>
             
