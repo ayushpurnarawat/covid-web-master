@@ -1,11 +1,11 @@
 import React, { Component, Suspense } from 'react'
 import classes from './MapStates.module.css'
 import SpinnerClass from './Spinner.module.css'
-import Chart from '../../FinaleChart/Chart'
+// import Chart from '../../FinaleChart/Chart'
 // import TotalData from './TotalData'
 // import BarChart from '../../FinaleChart/BarChart'
 // import TableData from './TableData'
-
+const Chart = React.lazy(()=>import("../../FinaleChart/Chart"))
 const BarChart = React.lazy(()=>import("../../FinaleChart/BarChart"))
 const TableData = React.lazy(()=>import('./TableData'))
 const TestMap = React.lazy(()=>import('./ma'))
@@ -126,6 +126,9 @@ class MapStates extends Component{
                     
                     </div>
                     <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailyConfirmChart">
+                    
+                    <Suspense fallback={<div className={SpinnerClass.loader}></div>}> 
+
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
@@ -135,8 +138,11 @@ class MapStates extends Component{
                             TypeID={"DailyConfirmChart"}
                             background={"rgb(245, 74, 42,.5)"}
                         />
+                        </Suspense>
                     </div>
                     <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailyRecoverdChart">
+                    <Suspense fallback={<div className={SpinnerClass.loader}></div>}> 
+
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
@@ -146,8 +152,12 @@ class MapStates extends Component{
                             TypeID={"DailyRecoverdChart"}
                             background={"rgb(120, 209, 109,.5)"}
                         />
+                    </Suspense>
+
                     </div>
                     <div style={{width:'100%',height:'400',marginTop:'2%',marginLeft:"2%"}} id="DailydeceasedChart">
+                    <Suspense fallback={<div className={SpinnerClass.loader}></div>}> 
+
                         <Chart 
                             Link={this.state.Link}
                             MapRegion={this.state.Country}    
@@ -157,6 +167,8 @@ class MapStates extends Component{
                             TypeID={"DailydeceasedChart"}
                             background={"rgb(106, 192, 198,.5)"}
                         />
+                     </Suspense>
+
                     </div>
                 </div>
                
