@@ -45,16 +45,21 @@ function TotalData(props){
                                     <h3 className={classes.ConfirmCases_p}>Country</h3>
                             </div>
                     </div> */}
-                    
+                <div id="Location_Name" style={{width:"100%",height:"50%",display:"flex"}}>
+                <span style={{color:"white",fontWeight:"bold",marginLeft:"2%",marginTop:"0%",fontSize:"25px"}}>{props.Country+"-OverView"}</span>
+                </div>
+                <div style={{width:"100%",height:"50%",display:"flex",flexDirection:"row"}}>
                     <div className={classes.ConfirmCases}>
                             
-                            <div className={classes.ActiveCases_number}>
-                            <h2 className={classes.ActiveCases_h}>{totalDataArray.map(function(d){return d.totalconfirmed})}</h2>
-                            </div>
-                            <div className={classes.ConfirmCases_HighLight}>
+                            <div className={classes.ConfirmCases_number}>
+                            <h2 className={classes.ActiveCases_h} style={{color:"red"}}>{totalDataArray.map(function(d){return d.totalconfirmed})}</h2>
                             
-                                <h3 className={classes.ConfirmCases_p}>Confirm</h3>
                             </div>
+                            {/* <div className={classes.ConfirmCases_HighLight}>
+                             */}
+                            <span className={classes.span_text} style={{color:"red",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Confirmed</span>
+                                
+                            {/* </div> */}
                     </div>
                     <div className={classes.ActiveCases}>
                            
@@ -62,9 +67,9 @@ function TotalData(props){
                             <h2 className={classes.ActiveCases_h}>{totalDataArray.map(function(d){return d.totalrecovered})}</h2>
 
                             </div>
-                            <div className={classes.ActiveCases_HighLight}>
-                            <h3 className={classes.ActiveCases_h}>Active</h3>
-                            </div>
+                            {/* <div className={classes.ActiveCases_HighLight}> */}
+                            <span style={{color:"rgb(13,90,231)",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Active</span>
+                            {/* </div> */}
                     </div>
                     
                     <div className={classes.Recover}>
@@ -74,9 +79,11 @@ function TotalData(props){
                                 {totalDataArray.map(function(d){return d.totalrecovered})}
                             </h2>
                             </div>
-                            <div className={classes.Recover_HighLight}>
-                            <h3 className={classes.Recover_h}>Recover</h3>
-                            </div>
+                            {/* <div className={classes.Recover_HighLight}> */}
+                            {/* <h3 className={classes.Recover_h}>
+                                Recover</h3> */}
+                            <span style={{color:"green",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Recover</span>
+                            {/* </div> */}
 
                     </div>
                     <div className={classes.Deceased}>
@@ -88,10 +95,11 @@ function TotalData(props){
                         </h2>
                         </div>
 
-                        <div className={classes.Deceased_HighLight}>
+                        {/* <div className={classes.Deceased_HighLight}>
                         <h3 className={classes.Deceased_h}>Deceased</h3>
-                        </div>
-
+                        </div> */}
+                            <span style={{color:"grey",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Deceased</span>
+                    </div>
                     </div>
                     </div>
     )

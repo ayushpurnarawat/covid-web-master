@@ -64,24 +64,31 @@
 }
 .CurrentData{
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     height:30%;
     margin-top:10%;
     width: 100%;
+    /* border: 1px solid aliceblue; */
 }
 .ConfirmCases{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
+    /* border:1px solid green; */
     width: 25%;
     height: 100%;
-    margin-left: 1%;
+    margin-left: 2%;
+    /* margin-top: 0%; */
     border-radius: 8px;
     /* padding: 10px; */
-    opacity: .4;
+    /* opacity: .4; */
     box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    background-color: rgb(38, 49,100);
     display: flex;
+    flex-direction: column;
+    /* display: block; */
     /* float: left; */
     /* align-items: baseline; */
-    flex-direction: column;
+    /* justify-content: center; */
+    /* flex-direction: column; */
 }
 .ConfirmCases_HighLight{
     width: 100%;
@@ -99,7 +106,7 @@
 }
 .ConfirmCases_p{
     color: white;
-    margin-top: 5%;
+    
 }
 .ConfirmCases:hover{
     background-color: rgb(235, 100, 100);
@@ -112,18 +119,22 @@
 }
 
 .Recover{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     width: 25%;
     height: 100%;
+    /* margin-top: 10%; */
+    /* border: 1px solid green; */
     margin-left: 1%;
     /* margin-top: -17%; */
     display: flex;
     align-items: baseline;
     flex-direction: column;
     border-radius: 8px;
-    /* padding: 5px; */
-    opacity: .5;
     box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    background-color: rgb(38, 49,100);
+    /* padding: 5px; */
+    /* opacity: .5; */
+    /* box-shadow: 0 24px 25px rgb(0,0,0,.5); */
 }
 .Recover_HighLight{
     width: 100%;
@@ -140,16 +151,19 @@
 }
 .Recover_h{
     color: rgb(38, 224, 38);
-    margin-top: 9px;
+    margin-top: 1%;
+    margin-left: 25%;
 
 }
 .Recover:hover .Recover_h{
     color: white;
 }
 .ActiveCases{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     width: 25%;
-    opacity: .4;
+    /* opacity: .4; */
+    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    background-color: rgb(38, 49,100);
     height: 100%;
     margin-left: 1%;
     border-radius: 8px;
@@ -157,7 +171,9 @@
     display: flex;
     align-items: baseline;
     flex-direction: column;
-    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    /* border:1px solid green; */
+    /* margin-top: 10%; */
+    /* box-shadow: 0 24px 25px rgb(0,0,0,.5); */
 }
 .ActiveCases_HighLight{
     width: 100%;
@@ -174,25 +190,36 @@
     transform: translateY(2px) ;
 }
 .ActiveCases_h{
-    color: blue;
-    margin-top: 9px;
+    color: rgb(13,90,231);
+    margin-top: 1%;
+    margin-left: 25%;
+    
 }
 .ActiveCases:hover .ActiveCases_h{
     color: white;
 }
+@media(max-width:600px){
+.span_text{
+    font-size: 20px;
+    /* margin-left: 5%; */
+    /* style={{color:"blue",fontWeight:"bold",margin:"auto",fontSize:"22px",marginTop:"-25px"}} */
+    }
+}
 .Deceased{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     width: 25%;
     height: 100%;
-    /* margin-top: -17%; */
+    /* margin-top: 10%; */
     display: flex;
     align-items: baseline;
     flex-direction: column;
     margin-left: 1%;
     border-radius: 5px;
-    /* padding: 10px; */
-    opacity: .4;
     box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    background-color: rgb(38, 49,100);
+    /* padding: 10px; */
+    /* opacity: .4; */
+    /* box-shadow: 0 24px 25px rgb(0,0,0,.5); */
 }
 .Deceased_HighLight{
     width: 100%;
@@ -209,8 +236,8 @@
 }
 .Deceased_h{
     color: grey;
-    opacity: 1;
-    margin-top: 9px;
+    margin-top: 1%;
+    margin-left: 25%;
 }
 .Deceased:hover .Deceased_h{
     color: white;
@@ -238,21 +265,37 @@
 }
 
 .Deceased_number{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+
     width: 100%;
-    height: 75%;
+    height:100%;
 }
 
 .ActiveCases_number{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+
     width: 100%;
-    height: 75%;
+    height: 100%;
 }
 .Recover_number{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+
     width: 100%;
-    height: 75%;
+    height: 100%;
 }
 .ConfirmCases_number{
+    /* display: block; */
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
     width: 100%;
-    height: 75%;
+    height: 100%;
 }
 .LoliPopChart_div{
     width: 45%;
@@ -383,5 +426,49 @@
     .Map_data{
         display: flex;
         flex-direction: row;
+    }
+}
+@media(max-width:600px){
+    .ActiveCases_h{
+        font-size: 20px;
+    }
+}
+@media(max-width:600px){
+    .Recover_h{
+        font-size: 20px;
+    }
+}
+@media(max-width:600px){
+    .Deceased_h{
+        font-size: 20px;
+    }
+}
+/* @media(max-width:600px){
+    .ac{
+        font-size: 20px;
+    }
+} */
+@media(max-width:600px)
+{
+    .ConfirmCases_number{
+        margin-left: -5px;
+    }
+}
+@media(max-width:600px)
+{
+    .Deceased_number{
+        margin-left: -5px;
+    }
+}
+@media(max-width:600px)
+{
+    .Recover_number{
+        margin-left: -5px;
+    }
+}
+@media(max-width:600px)
+{
+    .ActiveCases_number{
+        margin-left: -5px;
     }
 }
