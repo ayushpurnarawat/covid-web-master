@@ -284,11 +284,11 @@ function TableData(props){
             style={{height:'30%'}}
             >
             
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{data.statewise[key].state}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].confirmed}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].active}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].recovered}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'12.5%'}}>{data.statewise[key].deaths}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:"80%",height:'60%'}} >{data.statewise[key].state}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].confirmed}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].active}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].recovered}</div>
+            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].deaths}</div>
             {/* <div><Router> <Link to="/abc"><button>hello</button></Link></Router></div> */}
 
             </div>)

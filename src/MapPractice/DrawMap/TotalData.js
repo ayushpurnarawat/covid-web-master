@@ -52,7 +52,7 @@ function TotalData(props){
                     <div className={classes.ConfirmCases}>
                             
                             <div className={classes.ConfirmCases_number}>
-                            <h2 className={classes.ActiveCases_h} style={{color:"red"}}>{totalDataArray.map(function(d){return d.totalconfirmed})}</h2>
+                            <h3 className={classes.ActiveCases_h} style={{color:"red"}}>{totalDataArray.map(function(d){return d.totalconfirmed})}</h3>
                             
                             </div>
                             {/* <div className={classes.ConfirmCases_HighLight}>
@@ -64,7 +64,7 @@ function TotalData(props){
                     <div className={classes.ActiveCases}>
                            
                             <div className={classes.ActiveCases_number}>
-                            <h2 className={classes.ActiveCases_h}>{totalDataArray.map(function(d){return d.totalrecovered})}</h2>
+                            <h3 className={classes.ActiveCases_h}>{totalDataArray.map(function(d){return d.totalrecovered})}</h3>
 
                             </div>
                             {/* <div className={classes.ActiveCases_HighLight}> */}
@@ -75,9 +75,9 @@ function TotalData(props){
                     <div className={classes.Recover}>
                             
                             <div className={classes.Recover_number}>
-                            <h2 className={classes.Recover_h}>
+                            <h3 className={classes.Recover_h}>
                                 {totalDataArray.map(function(d){return d.totalrecovered})}
-                            </h2>
+                            </h3>
                             </div>
                             {/* <div className={classes.Recover_HighLight}> */}
                             {/* <h3 className={classes.Recover_h}>
@@ -90,9 +90,9 @@ function TotalData(props){
                         {/* <h3 className={classes.Deceased_h}>Deceased</h3>
                         <h2 className={classes.Deceased_h}>1000</h2> */}
                         <div className={classes.Deceased_number}>                        
-                            <h2 className={classes.Deceased_h}>
+                            <h3 className={classes.Deceased_h}>
                             {totalDataArray.map(function(d){return d.totaldeceased})}
-                        </h2>
+                        </h3>
                         </div>
 
                         {/* <div className={classes.Deceased_HighLight}>

@@ -168,7 +168,7 @@ function TestMap (props){
                                           if(region!=='india')
                                           var Stroke_Color_for_Map ='black'
                                           var projection = d3.geoMercator()
-                                            .fitSize([360,360],todo)
+                                            .fitSize([280,360],todo)
                                           var path = d3.geoPath(projection)
 
                                           // console.log(todo)
@@ -176,7 +176,7 @@ function TestMap (props){
                                           .append('svg')
                                           // .attr('width','80%')
                                           // .attr('height','50%')
-                                          .attr('viewBox',"0 0 400 400")
+                                          .attr('viewBox',"0 0 300 600")
                                           .attr("margin-left","1px")
                                           .attr("id",`the_SVG_ID_${MapType}`)
                                           .attr("class",classes.SVG_FOR_MAP)

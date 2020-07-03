@@ -59,6 +59,13 @@ class MapStates extends Component{
         return(
             <div id="MapStates" className={classes.main}>
                 <div id='DataSection' className={classes.DataSection} >
+                <button 
+                        style={{width:"100px",height:"50px"}}
+                        onClick={()=>this.ChangeCountryByButton(this.state.Country,this.state.Link)} 
+                        id="Change_Country_Button" 
+                         className='Change_Country_Button'>
+                             {SwitchMap}(Click To Switch)
+                    </button>
                     <Suspense>
                     <TotalData 
                         ResponseData={this.props.ResponseData} 
@@ -91,7 +98,7 @@ class MapStates extends Component{
 
                 </div>
                 <div id="MapSection" className={classes.MapSection} >
-                <div style={{display:'flex',flexDirection:"column",marginTop:"10%",height:"50%"}}>
+                <div style={{display:'flex',flexDirection:"column",marginTop:"5%",height:"100%"}}>
                 <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                     <TestMap 
                         MapRegion={this.state.Country}
@@ -100,12 +107,7 @@ class MapStates extends Component{
                         />
                     </Suspense>
                     <div id="Map_data" className={classes.Map_data}>
-                    {/* <button 
-                        onClick={()=>this.ChangeCountryByButton(this.state.Country,this.state.Link)} 
-                        id="Change_Country_Button" 
-                         className='Change_Country_Button'>
-                             {SwitchMap}(Click To Switch)
-                    </button> */}
+                    
                         
                      
                     </div>

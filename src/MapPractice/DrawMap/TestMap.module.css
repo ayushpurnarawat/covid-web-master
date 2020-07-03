@@ -93,6 +93,7 @@
 }
 .Map_data{
     display: flex;
+    height: 20%;
     /* flex-direction: row; 
     flex-wrap: wrap; */
 }
