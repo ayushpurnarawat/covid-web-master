@@ -80,7 +80,7 @@
     border-radius: 8px;
     /* padding: 10px; */
     /* opacity: .4; */
-    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    box-shadow: 0 24px 25px rgb(0,0,0,.2);
     background-color: rgb(38, 49,100);
     display: flex;
     flex-direction: column;
@@ -130,7 +130,7 @@
     align-items: baseline;
     flex-direction: column;
     border-radius: 8px;
-    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    box-shadow: 0 24px 25px rgb(0,0,0,.2);
     background-color: rgb(38, 49,100);
     /* padding: 5px; */
     /* opacity: .5; */
@@ -162,7 +162,7 @@
     /* background-color: aliceblue; */
     width: 25%;
     /* opacity: .4; */
-    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    box-shadow: 0 24px 25px rgb(0,0,0,.2);
     background-color: rgb(38, 49,100);
     height: 100%;
     margin-left: 1%;
@@ -215,7 +215,7 @@
     flex-direction: column;
     margin-left: 1%;
     border-radius: 5px;
-    box-shadow: 0 24px 25px rgb(0,0,0,.5);
+    box-shadow: 0 24px 25px rgb(0,0,0,.2);
     background-color: rgb(38, 49,100);
     /* padding: 10px; */
     /* opacity: .4; */

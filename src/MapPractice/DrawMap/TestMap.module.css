@@ -88,7 +88,7 @@
 }
 @media(max-width:600px){
     .Map_Visual_Data{
-        flex-direction: column;
+        flex-direction: row;
     }
 }
 .Map_data{
@@ -97,20 +97,49 @@
     flex-wrap: wrap; */
 }
 
-@media (max-width:600px){
+/* @media (max-width:600px){
 .SVG_FOR_MAP{
     margin-left: 150px;
     width: 70%;
 }
-}
+} */
 @media only screen and (max-width:450px){
-    SVG_FOR_MAP{
-        width: 50%;
+    .SVG_FOR_MAP{
+        width: 100%;
         margin-left: 50px;
     } 
 }
 @media(max-width:600px){
     .State_Map_Visual_Data{
         flex-direction: column;
+    }
+}
+
+@media(max-width:600px)
+{
+    .Map_Data_Recover{
+        width: 24.5%;
+        margin-left: .5%;
+
+    }
+}
+@media(max-width:600px){
+    .Map_Data_Confirm{
+        width: 24.5%;
+        margin-left: .5%;
+
+    }
+}
+@media(max-width:600px){
+    .Map_Data_Active{
+        width: 24.5%;
+        margin-left: .5%;
+    }
+}
+@media(max-width:600px){
+    .Map_Data_Death{
+        width: 24.5%;
+        margin-left: .5%;
+
     }
 }
