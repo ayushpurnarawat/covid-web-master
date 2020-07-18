@@ -235,7 +235,6 @@ function Chart(props)
                 return month[i]+props.TypeID
             })
             .on("mouseover",mouseover)
-    console.log(DataForChart)
     if(!data)
     return <div></div>
     return(
