@@ -1,9 +1,40 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
 import classes from './MapStates.module.css'
+import {makeStyles} from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import {Grid} from '@material-ui/core'
 import SpinnerClass from './Spinner.module.css'
+import { CardContent, Typography } from '@material-ui/core'
+import grid from '../../MaterialUi/grid'
+import NumberChange from '../../NumberChange'
+const useStyles = makeStyles({
+    root:{
+        flexGrow:1,
+        maxWidth:180,
+        marginLeft:2,
+        minWidth:20,
+        marginBottom:5
+    },
+    Cardroot:{
+        maxWidth:150
+    },
+    bullet:{
+        display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+    },
+    title:{
+        fontSize: 22,
+
+    },
+    pos: {
+        marginBottom: 12,
+      },
+})
 function TotalData(props){
     // console.log("TatalDATA")
+    const CLasses = useStyles()
     const {data} =useSWR(props.Link,url=>{
         fetch(url)
         .then(res=>{
@@ -37,71 +68,72 @@ function TotalData(props){
     // if(!data)
     // return <div className={SpinnerClass.loader}>loading</div>
     return(
-        <div  className={classes.CurrentData}>
-                                             
-                    {/* <div className={classes.Change_Country}>
-                            <h3 style={{color:'green'}}>{totalDataArray.map(function(d){return d.Country})}</h3>
-                            <div className={classes.Change_Country_HighLight}>
-                                    <h3 className={classes.ConfirmCases_p}>Country</h3>
-                            </div>
-                    </div> */}
-                <div id="Location_Name" style={{width:"100%",height:"50%",display:"flex"}}>
-                <span style={{color:"white",fontWeight:"bold",marginLeft:"2%",marginTop:"0%",fontSize:"25px"}}>{props.Country+"-OverView"}</span>
-                </div>
-                <div style={{width:"100%",height:"50%",display:"flex",flexDirection:"row"}}>
-                    <div className={classes.ConfirmCases}>
-                            
-                            <div className={classes.ConfirmCases_number}>
-                            <h3 className={classes.ActiveCases_h} style={{color:"red"}}>{totalDataArray.map(function(d){return d.totalconfirmed})}</h3>
-                            
-                            </div>
-                            {/* <div className={classes.ConfirmCases_HighLight}>
-                             */}
-                            <span className={classes.span_text} style={{color:"red",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Confirmed</span>
-                                
-                            {/* </div> */}
-                    </div>
-                    <div className={classes.ActiveCases}>
-                           
-                            <div className={classes.ActiveCases_number}>
-                            <h3 className={classes.ActiveCases_h}>{totalDataArray.map(function(d){return d.totalrecovered})}</h3>
-
-                            </div>
-                            {/* <div className={classes.ActiveCases_HighLight}> */}
-                            <span style={{color:"rgb(13,90,231)",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Active</span>
-                            {/* </div> */}
-                    </div>
+        
+        
+                <Grid item container >
                     
-                    <div className={classes.Recover}>
-                            
-                            <div className={classes.Recover_number}>
-                            <h3 className={classes.Recover_h}>
-                                {totalDataArray.map(function(d){return d.totalrecovered})}
-                            </h3>
-                            </div>
-                            {/* <div className={classes.Recover_HighLight}> */}
-                            {/* <h3 className={classes.Recover_h}>
-                                Recover</h3> */}
-                            <span style={{color:"green",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Recover</span>
-                            {/* </div> */}
+                {/* <div id="Location_Name" style={{width:"100%",height:"50%",display:"flex"}}>
+                <span style={{color:"white",fontWeight:"bold",marginLeft:"2%",marginTop:"0%",fontSize:"25px"}}>{props.Country+"-OverView"}</span>
+                </div> */}
+                
+                    <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography variant="h5" component="h2" className={CLasses.title} color="secondary" gutterBottom>
+                            {props.Country==='india'? NumberChange(totalDataArray.map(function(d){return d.totalconfirmed})):totalDataArray.map(function(d){return d.totalconfirmed})}
+                            </Typography>
+                            <Typography variant="h5" component="h2" color="secondary">
+                                    Confirmed
+                            </Typography>
+                        </CardContent>
 
-                    </div>
-                    <div className={classes.Deceased}>
-                        {/* <h3 className={classes.Deceased_h}>Deceased</h3>
-                        <h2 className={classes.Deceased_h}>1000</h2> */}
-                        <div className={classes.Deceased_number}>                        
-                            <h3 className={classes.Deceased_h}>
-                            {totalDataArray.map(function(d){return d.totaldeceased})}
-                        </h3>
-                        </div>
+                    </Card>
+                    
+                            <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography className={CLasses.title} style={{color:'blue'}} gutterBottom>
+                            {props.Country==='india'?NumberChange(totalDataArray.map(function(d){return d.totalactive})):totalDataArray.map(function(d){return d.totalactive})}
+                            </Typography>
+                            <Typography variant="h5" component="h2" style={{color:'blue'}}>
+                                    Active
+                            </Typography>
+                        </CardContent>
 
-                        {/* <div className={classes.Deceased_HighLight}>
-                        <h3 className={classes.Deceased_h}>Deceased</h3>
-                        </div> */}
-                            <span style={{color:"grey",fontWeight:"bold",margin:"auto",fontSize:"17px",marginTop:"-25px"}}>Deceased</span>
-                    </div>
-                    </div>
-                    </div>
+                    </Card>
+                    
+                    
+                   
+                            <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography className={CLasses.title} style={{color:'green'}} gutterBottom>
+                            {props.Country==='india'?NumberChange(totalDataArray.map(function(d){return d.totalrecovered})):totalDataArray.map(function(d){return d.totalrecovered})}
+                            </Typography>
+                            <Typography variant="h5" component="h2" style={{color:'green'}}>
+                                    Recoverd
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+
+                
+                        
+                        
+                            <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography className={CLasses.title} style={{color:'gray'}} gutterBottom>
+                            {props.Country==='india'?NumberChange(totalDataArray.map(function(d){return d.totaldeceased})):totalDataArray.map(function(d){return d.totaldeceased})}
+                            </Typography>
+                            <Typography variant="h5" component="h2" style={{color:'gray'}}>
+                                    Deceased
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                    
+             
+                    </Grid>
+                          
+
+                    
     )
 }
 export default TotalData

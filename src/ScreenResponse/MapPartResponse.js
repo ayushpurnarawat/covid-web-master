@@ -1,10 +1,11 @@
 import React, { Suspense, Component } from 'react'
-import SpinnerClass from './Spinner.module.css'
+import SpinnerClass from '../MapPractice/DrawMap/Spinner.module.css'
 // import MapStates from './MapStates'
 import useSWR from 'swr'
 import {Button} from '@material-ui/core'
 import axios from 'axios'
-const MapStates = React.lazy(()=>import('./MapStates'))
+import TablePart from '../Screen/TablePart'
+import MapPart from '../Screen/MapPart'
 var count =0
 var India_URl ="https://api.covid19india.org/data.json"
 var World_Url ="https://covid-19.dataflowkit.com/v1"
@@ -18,10 +19,11 @@ async function fetcher(url) {
   }
 var l =true
 
-function DataSection(props)
+const MapPartResponse= ()=>
 {
     // console.log("DataSection")
-    var ResponseData=''
+    console.log("ayush")
+    
     
     const {data:cases_time_series} = useSWR(India_URl,fetcher)
     
@@ -36,11 +38,12 @@ function DataSection(props)
     return(
         <div>
             <Suspense fallback={<div className={SpinnerClass.loader}></div>}>
-        <MapStates ResponseData={cases_time_series} WorldData={data}/>
+        {/* <MapStates ResponseData={cases_time_series} WorldData={data}/> */}
+        <MapPart ResponseData={cases_time_series} WorldData={data}/>
         </Suspense>
         {/* {ResponseData} */}
         </div>
     )
 }
 
-export default DataSection
+export default MapPartResponse

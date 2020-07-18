@@ -1,15 +1,21 @@
 import React from 'react'
 import Classes from './TestMap.module.css'
-
+import {Button, ThemeProvider, Typography} from '@material-ui/core'
+import theme from '../../MaterialUi/theme'
 function Display(props){
     
    
     // console.log(props)
     return(
         <div>
-        <h2 style={{color:'white'}} id="state_data">{props.state_Name}</h2>
+        <h2 style={{color:'black'}} id="state_data">{props.state_Name}</h2>
         <div className={Classes.Map_Visual_Data} data={"ayush"} id="ayush">
-      
+          {/* <ThemeProvider theme={theme}>
+        <Button color="secondary">This is my button</Button>
+        </ThemeProvider> */}
+        {/* <Typography color="secondary">
+          HIIII ayush
+        </Typography> */}
       <div className={Classes.Map_Data_Confirm} id="confirm">
           <div className={Classes.Map_Data_Confirm_focus}>
             <h5>Confirmed</h5>

@@ -176,7 +176,7 @@ function TestMap (props){
                                           .append('svg')
                                           // .attr('width','80%')
                                           // .attr('height','50%')
-                                          .attr('viewBox',"0 0 300 600")
+                                          .attr('viewBox',"0 0 400 700")
                                           .attr("margin-left","1px")
                                           .attr("id",`the_SVG_ID_${MapType}`)
                                           .attr("class",classes.SVG_FOR_MAP)
@@ -263,7 +263,7 @@ function TestMap (props){
 
                                                     if(region==='world')
                                                     {
-                                                      var TableViewHeight = document.getElementById("TableView").offsetHeight
+                                                      // var TableViewHeight = document.getElementById("TableView").offsetHeight
                                                       for(var key in Response.data)
                                                       {
                                                           try{
@@ -274,18 +274,18 @@ function TestMap (props){
                                                             .transition()
                                                             .duration(100)
                                                             .style("background-color","rgb(50, 71, 170)")
-                                                            if(CheckKey>20 && CheckKey <50)
-                                                            {
-                                                              document.getElementById("TableView").scrollTo(0,(CheckKey*2)+TableViewHeight)
-                                                            }
-                                                            else if(CheckKey>51 && CheckKey<210)
-                                                            {
-                                                              document.getElementById("TableView").scrollTo(0,((CheckKey/2)*2)+TableViewHeight)
+                                                            // if(CheckKey>20 && CheckKey <50)
+                                                            // {
+                                                            //   document.getElementById("TableView").scrollTo(0,(CheckKey*2)+TableViewHeight)
+                                                            // }
+                                                            // else if(CheckKey>51 && CheckKey<210)
+                                                            // {
+                                                            //   document.getElementById("TableView").scrollTo(0,((CheckKey/2)*2)+TableViewHeight)
 
-                                                            }
-                                                            else{
-                                                              document.getElementById("TableView").scrollTo(10,(CheckKey-TableViewHeight))
-                                                            }
+                                                            // }
+                                                            // else{
+                                                            //   document.getElementById("TableView").scrollTo(10,(CheckKey-TableViewHeight))
+                                                            // }
                                                         }
                                                         }
                                                         catch{
@@ -299,7 +299,7 @@ function TestMap (props){
                                                       // .duration(100)
                                                       // .style("background-color","green")
                                                       
-                                                      var TableViewHeight = document.getElementById("TableView").offsetHeight
+                                                      // var TableViewHeight = document.getElementById("TableView").offsetHeight
                                                       
 
                                                       for(var key in Response.data.statewise)
@@ -311,15 +311,15 @@ function TestMap (props){
                                                             .transition()
                                                             .duration(100)
                                                             .style("background-color","rgb(50, 71, 170)")
-                                                          if(CheckKey>20 && CheckKey<40)
-                                                          {
-                                                            document.getElementById("TableView").scrollTo(10,(parseInt(key)*2)+TableViewHeight,"auto")
-                                                          }
+                                                          // if(CheckKey>20 && CheckKey<40)
+                                                          // {
+                                                          //   document.getElementById("TableView").scrollTo(10,(parseInt(key)*2)+TableViewHeight,"auto")
+                                                          // }
                                                           
-                                                          else{
-                                                            document.getElementById("TableView").scrollTo(10,(parseInt(key/10)-TableViewHeight),"smooth")
+                                                          // else{
+                                                          //   document.getElementById("TableView").scrollTo(10,(parseInt(key/10)-TableViewHeight),"smooth")
 
-                                                          }
+                                                          // }
                                                         }
                                                       }
                                                       

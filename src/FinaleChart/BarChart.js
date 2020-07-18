@@ -93,7 +93,7 @@ function BarChart(props){
     .attr("transform",'translate(30,350)')
     .selectAll("text")
     .attr("transform","translate(-23,-47)rotate(-90)")
-    .style("color",'white')
+    .style("color",'black')
     .style("font-weight","bold")
     .style("font-size","13px")
     
@@ -104,7 +104,7 @@ function BarChart(props){
             //     console.log(d.ConfimrCases)
             //     return d.ConfimrCases
             // }))
-            .domain([0,180000])
+            .domain([0,350000])
             // .domain([0,d3.max(TopEffectedStateArray,function(d){
             //     // console.log(d.ConfimrCases)
             //     return parseInt(d.ConfimrCases)

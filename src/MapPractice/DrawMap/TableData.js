@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 import Spinner from './Spinner.module.css'
 import useSWR from 'swr'
 import {Link,Router} from 'react-router-dom'
+import { TableBody, TableRow, TableCell } from '@material-ui/core'
 function TableData(props){
     // console.log("TableData")
     var districtDataArrat ={}
@@ -166,7 +167,7 @@ function TableData(props){
     function ch(event){
         var ID= parseInt(event.target.id)
        
-
+        // console.log("mohshvs")
         // console.log(event.target.id)
         // console.log(data.statewise)
         var d=data["statewise"]
@@ -237,25 +238,34 @@ function TableData(props){
                 if(key!=='0')
                 {
                     try{
-                    show.push(
-                        <div className={classes.Table_Cell_Data } 
-                        key={key} 
-                        // id={(data[key].Country_text).replace(" ","").replace(" ","")+"_TableData"}
-                        id={key}
-                        confirmed={data[key]['Total Cases_text']}
-            
-                        onMouseOver={(event)=>WorldMouseOver(event)}
-                        onTouchStart={onTouch}
-                        onMouseLeave={(event)=>CountryMouseLeave(event)}
-                        style={{height:'30%'}}
-                        >
-                        
-                        <div  className={classes.Cell_Data} style={{width:"50%",height:'60%'}} >{data[key].Country_text}</div>
-                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Cases_text']}</div>
-                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Active Cases_text']}</div>
-                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Recovered_text']}</div>
-                        <div  className={classes.Cell_Data} style={{width:'12.5%'}}>{data[key]['Total Deaths_text']}</div>
-                        </div>)
+                    
+                        show.push(
+                                        
+                            <TableRow 
+                                id={key}
+                                key={key}
+                                onClick={(event)=>DistrictDataCall(event)}
+                                confirmed={data[key]['Total Cases_text']}
+                                onMouseOver={(event)=>WorldMouseOver(event)}
+                                onTouchStart={onTouch}
+                                onMouseLeave={(event)=>CountryMouseLeave(event)}
+                                >
+                                    <TableCell id={key} >
+                                    {data[key].Country_text}            
+                                    </TableCell>
+                                    <TableCell id={key}>
+                                    {data[key]['Total Cases_text']}            
+                                    </TableCell>
+                                    <TableCell id={key}>
+                                    {data[key]['Active Cases_text']}            </TableCell>
+                                    <TableCell id={key}>
+                                    {data[key]['Total Recovered_text']}            </TableCell>
+                                    <TableCell id={key}>
+                                    {data[key]['Total Deaths_text']}            </TableCell>
+                            </TableRow>
+
+
+                        )
                     }
                     catch{
 
@@ -271,27 +281,37 @@ function TableData(props){
         
         if(key!=='0')
         {
-            show.push(
-            <div className={"Hello",classes.Table_Cell_Data} 
-            key={data.statewise[key].state} 
-            // id={props.data.statewise[key].state+"_TableData"}
-            id={key}
-            confirmed={data.statewise[key].confirmed}
-            onClick={(event)=>DistrictDataCall(event)}
-            onMouseOver={(event)=>ch(event)}
-            onTouchStart={onTouch}
-            onMouseLeave={(event)=>MouseLeave(event)}
-            style={{height:'30%'}}
-            >
             
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:"80%",height:'60%'}} >{data.statewise[key].state}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].confirmed}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].active}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].recovered}</div>
-            <div id={key} can={data.statewise[key].state} className={classes.Cell_Data} style={{width:'21.5%'}}>{data.statewise[key].deaths}</div>
-            {/* <div><Router> <Link to="/abc"><button>hello</button></Link></Router></div> */}
+            show.push(
+                
+                <TableRow 
+                    id={key}
+                    key={data.statewise[key].state}
+                    onClick={(event)=>DistrictDataCall(event)}
+                    confirmed={data.statewise[key].confirmed}
+                    onMouseOver={(event)=>ch(event)}
+                    onTouchStart={onTouch}
+                    onMouseLeave={(event)=>MouseLeave(event)}
+                    >
+                        <TableCell id={key} >
+                        {data.statewise[key].state}
+                        </TableCell>
+                        <TableCell id={key}>
+                        {data.statewise[key].confirmed}
+                        </TableCell>
+                        <TableCell id={key}>
+                        {data.statewise[key].active}
+                        </TableCell>
+                        <TableCell id={key}>
+                        {data.statewise[key].recovered}
+                        </TableCell>
+                        <TableCell id={key}>
+                        {data.statewise[key].deaths}
+                        </TableCell>
+                </TableRow>
 
-            </div>)
+            
+            )
             
         }
     }
@@ -303,12 +323,12 @@ function TableData(props){
     if(!data)
     return <div className={Spinner.loader}></div>
     return(
-        <div id="update"style={{display:'flex',flexDirection:'column'}}>
-        
+        // <div id="update"style={{display:'flex',flexDirection:'column'}}>
+        <TableBody>
         {show}
-        {StateData.showDistrict&&(<div id="state-meta">district</div>)}
-
-        </div>
+        {/* {StateData.showDistrict&&(<div id="state-meta">district</div>)} */}
+        </TableBody>
+        // </div>
     )
 }
 export default TableData

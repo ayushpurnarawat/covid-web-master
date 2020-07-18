@@ -317,9 +317,7 @@
     flex-direction: column;
     
 }
-::-webkit-scrollbar{
-    width: 20px;
-}
+
 
 .Table_Row_Heading{
     display: flex;
