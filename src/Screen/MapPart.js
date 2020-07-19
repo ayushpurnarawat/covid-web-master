@@ -1,7 +1,8 @@
 import React, { Component, Suspense } from 'react'
 import classes from '../MapPractice/DrawMap/MapStates.module.css'
 import SpinnerClass from '../MapPractice/DrawMap/Spinner.module.css'
-import { Container } from '@material-ui/core'
+import { Container, ThemeProvider,Paper } from '@material-ui/core'
+import theme from '../MaterialUi/theme'
 // import Chart from '../../FinaleChart/Chart'
 // import TotalData from './TotalData'
 // import BarChart from '../../FinaleChart/BarChart'
@@ -28,45 +29,23 @@ class MapPart extends Component{
     }
     
     
-    ChangeCountryByButton=(Country,Link)=>{
-        // var response =Swr()
-        // if(response)
-        // console.log(response)
-        if(Country==='india')
-        {
-            Country='world'
-            Link="https://covid-19.dataflowkit.com/v1"
-            SwitchMap='india'
-        }
-        else{
-            Country='india'
-            Link="https://api.covid19india.org/data.json"
-            SwitchMap='world'
-        }
-        this.setState({
-            Country:Country,
-            Link:Link
-            
-        })
-        
-        
-
-    }
+    
    
     render()
     {
-        // console.log("MapStates")
         return(
 
             <div id="MapSection" >
                 {/* <div style={{marginLeft:'20%'}}> */}
+                
                 <Container maxWidth="sm" >
 
                 <Suspense fallback={<div className={SpinnerClass.loader}>Loading..</div>}>
                     <TestMap 
                         MapRegion={this.state.Country}
-                        WorldResponse = {this.props.WorldData}
+                
                             IndiaResponse = {this.props.ResponseData}
+                            DarkMode={this.props.DarkMode}
                         />
                     </Suspense>
                     
@@ -75,7 +54,7 @@ class MapPart extends Component{
                     </div>
                     </Container>
                     {/* <div style={{width:'80%',height:'410px',marginTop:'-50%',marginLeft:"10%"}} id="BarCharts"> */}
-                    <Container maxWidth="sm" style={{marginTop:"-50%"}}>
+                    {/* <Container maxWidth="sm" style={{marginTop:"-50%"}}>
 
                     <Suspense fallback={<div ></div>}> 
                      <BarChart 
@@ -84,12 +63,12 @@ class MapPart extends Component{
                             MapRegion={this.state.Country}
                             WorldResponse = {this.props.WorldData}
                             IndiaResponse = {this.props.ResponseData}
+                            DarkMode={this.props.DarkMode}
                         /> 
                         
                     </Suspense>
                     </Container>
-                    {/* </div> */}
-                    {/* <div style={{width:'72%',height:'400',marginTop:'2%',marginLeft:"10%"}} id="DailyConfirmChart"> */}
+                    
                     <Container maxWidth="sm" id="DailyConfirmChart">
                     <Suspense fallback={<div ></div>}> 
 
@@ -104,8 +83,7 @@ class MapPart extends Component{
                         />
                         </Suspense>
                         </Container>
-                    {/* </div> */}
-                    {/* <div style={{width:'72%',height:'400',marginTop:'2%',marginLeft:"10%"}} id="DailyRecoverdChart"> */}
+                    
                     <Container maxWidth="sm" id="DailyRecoverdChart">
                     <Suspense fallback={<div ></div>}> 
 
@@ -120,8 +98,7 @@ class MapPart extends Component{
                         />
                     </Suspense>
                     </Container>
-                    {/* </div> */}
-                    {/* <div style={{width:'72%',height:'400',marginTop:'2%',marginLeft:"10%"}} id="DailydeceasedChart"> */}
+                    
                         <Container maxWidth="sm"    id="DailydeceasedChart"  >
                     <Suspense fallback={<div ></div>}> 
 
@@ -135,8 +112,8 @@ class MapPart extends Component{
                             background={"rgb(106, 192, 198,.5)"}
                         />
                      </Suspense>
-                     </Container>
-                    {/* </div> */}
+                     </Container> */}
+                     
                 </div>
                
         )

@@ -1,56 +1,88 @@
 import React from 'react'
 import Classes from './TestMap.module.css'
-import {Button, ThemeProvider, Typography} from '@material-ui/core'
+import {Button, ThemeProvider, Typography,Card,CardContent,makeStyles, Paper} from '@material-ui/core'
 import theme from '../../MaterialUi/theme'
+const useStyles = makeStyles({
+  root:{
+      flexGrow:1,
+      maxWidth:180,
+      marginLeft:2,
+      minWidth:20,
+      marginBottom:5,
+      backgroundImage:'linear-gradient(toright, rgb(235, 100, 100),rgb(235, 100, 130))'
+
+  },
+  Cardroot:{
+      maxWidth:150
+  },
+  bullet:{
+      display: 'inline-block',
+  margin: '0 2px',
+  transform: 'scale(0.8)',
+  },
+  title:{
+      fontSize: 22,
+
+  },
+  pos: {
+      marginBottom: 12,
+    },
+})
 function Display(props){
-    
+   const CLasses = useStyles()
    
     // console.log(props)
     return(
         <div>
-        <h2 style={{color:'black'}} id="state_data">{props.state_Name}</h2>
+        <h2 style={{color:props.DarkMode?'white':'black'}} id="state_data">{props.state_Name}</h2>
         <div className={Classes.Map_Visual_Data} data={"ayush"} id="ayush">
-          {/* <ThemeProvider theme={theme}>
-        <Button color="secondary">This is my button</Button>
-        </ThemeProvider> */}
-        {/* <Typography color="secondary">
-          HIIII ayush
-        </Typography> */}
-      <div className={Classes.Map_Data_Confirm} id="confirm">
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Confirmed</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number} >
-    <h3 id="confirm_data">{props.Confirm}</h3>
-          </div>
           
-      </div>
-      <div className={Classes.Map_Data_Active}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Active</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3 id="active_data">{props.ActiveCases}</h3>
-          </div>
-      </div>
-      
-      <div className={Classes.Map_Data_Recover}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Recoverd</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3 id="recover_data">{props.Recoverd}</h3>
-          </div>
-      </div>
-      <div className={Classes.Map_Data_Death}>
-          <div className={Classes.Map_Data_Confirm_focus}>
-            <h5>Deceased</h5>
-          </div>
-          <div className={Classes.Map_Data_Confirm_Number}>
-          <h3 id="death_data">{props.Death}</h3>
-          </div>
-      </div>
-      
+     
+      <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography variant="h5" component="h2" className={CLasses.title} color="secondary" gutterBottom>
+                            {props.Confirm}
+                            </Typography>
+                            <Typography variant="h5" component="h2" color="secondary">
+                                    Confirmed
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                    <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography variant="h5" component="h2" className={CLasses.title} style={{color:"#2f89fc"}} gutterBottom>
+                            {props.ActiveCases}
+                            </Typography>
+                            <Typography variant="h5" component="h2" color="s" style={{color:"#2f89fc"}}>
+                            Active
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                    <Card className={CLasses.root} variant="outlined">
+                        <CardContent>
+                            <Typography variant="h5" component="h2" className={CLasses.title} style={{color:"green"}} gutterBottom>
+                            {props.Recoverd}
+                            </Typography>
+                            <Typography variant="h5" component="h2" style={{color:"green"}}>
+                            Recoverd
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                    <Card className={CLasses.root} variant="outlined" >
+                        <CardContent>
+                            <Typography variant="h5" component="h2" className={CLasses.title} style={{color:"gray"}} gutterBottom>
+                            {props.Death}
+                            </Typography>
+                            <Typography variant="h5" component="h2" style={{color:"gray"}}>
+                            Deceased
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                    
         </div>
         </div>
     )

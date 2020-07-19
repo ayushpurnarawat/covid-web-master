@@ -13,7 +13,7 @@ var size =0
 var SwitchMap ="World"
 var link ="https://api.covid19india.org/data.json"
 const ColumnsHeader = [
-    {id:'StateName',label:'State',minWidth:170,fontWeight:'bold'},
+    {id:'StateName',label:'Country',minWidth:170,fontWeight:'bold'},
     {id:'ConfirmCases',label:'Confirmed',minWidth:100,fontWeight:'bold'},
     {id:'ActiveCases',label:'Active',minWidth:100,fontWeight:'bold'},
     {id:'RecoverCases',label:'Recover',minWidth:100,fontWeight:'bold'},
@@ -27,7 +27,7 @@ const UseStyles = makeStyles({
         maxWidth:440,
     }
 })
-class TablePart extends Component{
+class GlobalTablePart extends Component{
     
     state = {
         done:false,
@@ -35,18 +35,18 @@ class TablePart extends Component{
         totalrecovered:0,
         totaldeceased:0,
         totalactive:0,
-        Country:'india',
-        Link:"https://api.covid19india.org/data.json",
+        Country:'world',
+        Link:"https://covid-19.dataflowkit.com/v1",
         Change_Map_Name:'world'
 
     }
     
     
-   
+    
+    
    
     render(){
-       
-
+        
         var cell =[]
         ColumnsHeader.map((column)=>{
           cell.push(  <TableCell
@@ -63,10 +63,10 @@ class TablePart extends Component{
                     <div style={{flexDirection:"column"}}>
                     <Suspense>
                     <TotalData 
-                        ResponseData={this.props.ResponseData} 
+                         
                         Country={this.state.Country}
                         Link={this.state.Link}
-                        IndiaResponse = {this.props.ResponseData}
+                        WorldResponse = {this.props.WorldData}
                     />
                     </Suspense>
                      </div>
@@ -102,4 +102,4 @@ class TablePart extends Component{
         )
     }
 }
-export default TablePart
+export default GlobalTablePart

@@ -9,7 +9,8 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-              <ThemeProvider theme={theme}/>
+    
+    {/* <ThemeProvider theme={theme}/> */}
 
     <App />
   </React.StrictMode>,

@@ -38,15 +38,11 @@ function TableData(props){
             })
         )
         
-    // const {data:dos} =useSWR("https://api.covid19india.org/state_district_wise.json",url=>
-    //         fetch(url)
-    //         .then(res=>{
-    //             return res.json()
-    //         })
-    //         )
+    
     function onTouch(event){
         // event.prevent.default();
         var ID= parseInt(event.target.id)
+        try{
         var d=props.data["statewise"]
         
         if(!isNaN(ID)){
@@ -61,6 +57,10 @@ function TableData(props){
                 toggel:true
     
             })
+        }
+        }
+        catch{
+
         }
     }
     function WorldMouseOver(event){

@@ -93,7 +93,7 @@ function BarChart(props){
     .attr("transform",'translate(30,350)')
     .selectAll("text")
     .attr("transform","translate(-23,-47)rotate(-90)")
-    .style("color",'black')
+    .style("color",props.DarkMode?'white':'black')
     .style("font-weight","bold")
     .style("font-size","13px")
     

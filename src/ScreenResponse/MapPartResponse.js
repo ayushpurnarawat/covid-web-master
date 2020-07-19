@@ -19,7 +19,7 @@ async function fetcher(url) {
   }
 var l =true
 
-const MapPartResponse= ()=>
+const MapPartResponse= ({DarkMode})=>
 {
     // console.log("DataSection")
     console.log("ayush")
@@ -27,21 +27,19 @@ const MapPartResponse= ()=>
     
     const {data:cases_time_series} = useSWR(India_URl,fetcher)
     
-    const {data} = useSWR(World_Url,fetcher)
+    // const {data} = useSWR(World_Url,fetcher)
 
     
 
-    if((!cases_time_series)&&(!data)){
+    if((!cases_time_series)){
         return <div className={SpinnerClass.loader} >Loading</div>
     }
     
     return(
         <div>
             <Suspense fallback={<div className={SpinnerClass.loader}></div>}>
-        {/* <MapStates ResponseData={cases_time_series} WorldData={data}/> */}
-        <MapPart ResponseData={cases_time_series} WorldData={data}/>
+        <MapPart ResponseData={cases_time_series}  DarkMode={DarkMode}/>
         </Suspense>
-        {/* {ResponseData} */}
         </div>
     )
 }

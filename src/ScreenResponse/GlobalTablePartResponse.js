@@ -1,6 +1,7 @@
 import React, { Suspense, Component } from 'react'
 import SpinnerClass from '../MapPractice/DrawMap/Spinner.module.css'
 // import MapStates from './MapStates'
+import GlobalTablePart from '../Screen/GlobalTablePart'
 import useSWR from 'swr'
 import {Button} from '@material-ui/core'
 import axios from 'axios'
@@ -18,26 +19,27 @@ async function fetcher(url) {
   }
 var l =true
 
-const TablePartResponse= ({Ayush})=>
+const GlobalTablePartResponse= ({Ayush})=>
 {
+    // console.log("DataSection")
     
     
-    const {data:cases_time_series} = useSWR(India_URl,fetcher)
     
+    const {data} = useSWR(World_Url,fetcher)
 
     
 
-    if((!cases_time_series)){
+    if(!data){
         return <div className={SpinnerClass.loader} >Loading</div>
     }
     
     return(
         <div>
             <Suspense fallback={<div className={SpinnerClass.loader}></div>}>
-        <TablePart ResponseData={cases_time_series}  Ayush={Ayush}/>
+        <GlobalTablePart WorldData={data} Ayush={Ayush}/>
         </Suspense>
         </div>
     )
 }
 
-export default TablePartResponse
+export default GlobalTablePartResponse

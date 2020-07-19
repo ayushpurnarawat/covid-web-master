@@ -6,18 +6,17 @@ import Card from '@material-ui/core/Card'
 import {Grid} from '@material-ui/core'
 import SpinnerClass from './Spinner.module.css'
 import { CardContent, Typography } from '@material-ui/core'
-import grid from '../../MaterialUi/grid'
 import NumberChange from '../../NumberChange'
 const useStyles = makeStyles({
     root:{
         flexGrow:1,
         maxWidth:180,
-        marginLeft:2,
-        minWidth:20,
+        
+        minWidth:150,
         marginBottom:5
     },
     Cardroot:{
-        maxWidth:150
+        marginTop:'10%'
     },
     bullet:{
         display: 'inline-block',
@@ -70,11 +69,8 @@ function TotalData(props){
     return(
         
         
-                <Grid item container >
+                <Grid item container className={CLasses.Cardroot} style={{margin:20}} >
                     
-                {/* <div id="Location_Name" style={{width:"100%",height:"50%",display:"flex"}}>
-                <span style={{color:"white",fontWeight:"bold",marginLeft:"2%",marginTop:"0%",fontSize:"25px"}}>{props.Country+"-OverView"}</span>
-                </div> */}
                 
                     <Card className={CLasses.root} variant="outlined">
                         <CardContent>
@@ -90,10 +86,10 @@ function TotalData(props){
                     
                             <Card className={CLasses.root} variant="outlined">
                         <CardContent>
-                            <Typography className={CLasses.title} style={{color:'blue'}} gutterBottom>
+                            <Typography className={CLasses.title} style={{color:'#2f89fc'}} gutterBottom>
                             {props.Country==='india'?NumberChange(totalDataArray.map(function(d){return d.totalactive})):totalDataArray.map(function(d){return d.totalactive})}
                             </Typography>
-                            <Typography variant="h5" component="h2" style={{color:'blue'}}>
+                            <Typography variant="h5" component="h2" style={{color:'#2f89fc'}}>
                                     Active
                             </Typography>
                         </CardContent>

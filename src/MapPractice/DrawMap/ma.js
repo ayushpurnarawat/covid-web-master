@@ -18,7 +18,7 @@ function TestMap (props){
             country_Name:'',
             flag:false
           })
-
+          
           const [state_Name,SetState_Name] = useState({
             state_Name:'India',
             ActiveCases:'',
@@ -120,15 +120,7 @@ function TestMap (props){
                                       ...res
                                     }
                                 })
-                                else if(region==='world')
-                                {
-                                  Axios.get('https://covid-19.dataflowkit.com/v1').then(function(res){
-                                    // console.log(res,"world")
-                                    Response={
-                                      ...res
-                                    }
-                                  })
-                                }
+                                
                                 else{
                                   Axios.get('https://api.covid19india.org/state_district_wise.json').then(function(res){
                                     Response={
@@ -217,29 +209,7 @@ function TestMap (props){
                                                       Death:deat
                                                     })
                                                   }
-                                                  else if(region==='world')
-                                                  {
-                                                      try{  
-                                                    var[country_Name,total_confirm,total_Active,tatal_recoverd,total_death]=MapNavigation(d.properties,Response,region)
-
-                                                      SetGlobal({
-                                                        country_Name:country_Name,
-                                                        total_confirm:total_confirm,
-                                                        total_Active:total_Active,
-                                                        total_death:total_death,
-                                                        total_recoverd:tatal_recoverd
-                                                      })
-                                                    }
-                                                    catch{
-                                                      SetGlobal({
-                                                        country_Name:d.properties.name,
-                                                        total_confirm:'0',
-                                                        total_Active:'0',
-                                                        total_death:'0',
-                                                        total_recoverd:'0'
-                                                      })
-                                                    }
-                                                  }
+                                                  
                                                   else{
                                                     try{
                                                     var [districtName,active,Confirm,death,recovered] = MapNavigation(d.properties,Response,region)
@@ -261,45 +231,9 @@ function TestMap (props){
 
                                                    
 
-                                                    if(region==='world')
-                                                    {
-                                                      // var TableViewHeight = document.getElementById("TableView").offsetHeight
-                                                      for(var key in Response.data)
-                                                      {
-                                                          try{
-                                                        if((Response.data[key].Country_text).replace(" ","").replace(" ","")===d.properties.name)
-                                                        {
-                                                          var CheckKey =parseInt(key)
-                                                          d3.select(`[id="${key}"]`)
-                                                            .transition()
-                                                            .duration(100)
-                                                            .style("background-color","rgb(50, 71, 170)")
-                                                            // if(CheckKey>20 && CheckKey <50)
-                                                            // {
-                                                            //   document.getElementById("TableView").scrollTo(0,(CheckKey*2)+TableViewHeight)
-                                                            // }
-                                                            // else if(CheckKey>51 && CheckKey<210)
-                                                            // {
-                                                            //   document.getElementById("TableView").scrollTo(0,((CheckKey/2)*2)+TableViewHeight)
-
-                                                            // }
-                                                            // else{
-                                                            //   document.getElementById("TableView").scrollTo(10,(CheckKey-TableViewHeight))
-                                                            // }
-                                                        }
-                                                        }
-                                                        catch{
-                                                          console.log(Response.data[key].Country_text,key,Response)
-                                                        }
-                                                      }
-                                                    }
-                                                    else{
-                                                      // d3.select(`#${d.properties.st_nm.replace(" ","")}_TableData`)
-                                                      // .transition()
-                                                      // .duration(100)
-                                                      // .style("background-color","green")
+                                                    
+                                                    if(region==='india'){
                                                       
-                                                      // var TableViewHeight = document.getElementById("TableView").offsetHeight
                                                       
 
                                                       for(var key in Response.data.statewise)
@@ -311,15 +245,7 @@ function TestMap (props){
                                                             .transition()
                                                             .duration(100)
                                                             .style("background-color","rgb(50, 71, 170)")
-                                                          // if(CheckKey>20 && CheckKey<40)
-                                                          // {
-                                                          //   document.getElementById("TableView").scrollTo(10,(parseInt(key)*2)+TableViewHeight,"auto")
-                                                          // }
-                                                          
-                                                          // else{
-                                                          //   document.getElementById("TableView").scrollTo(10,(parseInt(key/10)-TableViewHeight),"smooth")
-
-                                                          // }
+                                                         
                                                         }
                                                       }
                                                       
@@ -353,17 +279,7 @@ function TestMap (props){
                                                       // .attr('disabled',true)
                                                       // }
                                                   }
-                                                  let ChangeCountryByButton_India = function(d){
-                                                    SetChangeCountry({
-                                                      country_Name:'india',
-                                                      flag:true
-                                                    })
-                                                    if(ChangeCountry.flag){
-                                                    d3.select("#Change_Country_Button_India")
-                                                    .attr('disabled',true)
-                                                    }
-                                                  }
-                                                  // console.log("error","topo",todo)
+                                                  
                                                   let mouseLeave = function(d) 
                                                                     {
                                                                       d3.selectAll(".State")
@@ -461,8 +377,8 @@ function TestMap (props){
                                                     // console.log(region)
                                                     if(region==='world')
                                                     return d3.interpolatePiYG((i)/1000)
-
-                                                    return d3.interpolatePRGn(d.properties.st_code/100)
+                                                    
+                                                    return d3.interpolatePiYG(d.properties.st_code/100)
                                                   })
                                                   
                                                   .style("stroke",Stroke_Color_for_Map)
@@ -500,6 +416,7 @@ function TestMap (props){
      <Display state_Name={state_Name.state_Name} Confirm={state_Name.Confrim}
         ActiveCases={state_Name.ActiveCases} Recoverd={state_Name.Recoverd}
         Death={state_Name.Death}
+        DarkMode={props.DarkMode}
      />
     
     </div>
@@ -510,7 +427,11 @@ function TestMap (props){
     <div data={Global.total_confirm}>
     <Display state_Name={Global.country_Name} Confirm={Global.total_confirm}
         ActiveCases={Global.total_Active} Recoverd={Global.total_recoverd}
-        Death={Global.total_death}/>
+        Death={Global.total_death}
+        DarkMode={props.DarkMode}
+        />
+                
+
         </div>
     )
   }
@@ -520,6 +441,8 @@ function TestMap (props){
           <Display state_Name={ChangeRegion.DistrictName} Confirm={ChangeRegion.ConfirmCases}
         ActiveCases={ChangeRegion.ActiveCases} Recoverd={ChangeRegion.recovered}
         Death={ChangeRegion.Deaths}
+        DarkMode={props.DarkMode}
+
      />
       
       </div>
